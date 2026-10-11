@@ -1,11 +1,359 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>TQ Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TQ Store | نظام المبيعات المتكامل</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0ea5e9', // Sky blue
+                        dark: {
+                            bg: '#1a1d21', // Dark UI background from screenshots
+                            card: '#22252a',
+                            border: '#33373e'
+                        },
+                        light: {
+                            bg: '#f8fafc',
+                            card: '#ffffff',
+                            border: '#e2e8f0'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif'], // Windows UI vibe
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Scrollbar to match WinUI */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Smooth transition for theme toggle */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Glassmorphism for header */
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
 </head>
-<body>
-    <h1>مرحباً بك في موقع نظام TQ Store</h1>
-    <p>الموقع تحت الإنشاء...</p>
+<body class="bg-light-bg text-gray-800 dark:bg-dark-bg dark:text-gray-200 antialiased font-sans transition-colors duration-300">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-header bg-white/80 dark:bg-dark-card/80 border-b border-light-border dark:border-dark-border transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold">
+                        TQ
+                    </div>
+                    <span class="font-bold text-xl tracking-tight">TQ Store</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 space-x-reverse items-center">
+                    <a href="#home" class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary font-medium transition-colors">الرئيسية</a>
+                    <a href="#features" class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary font-medium transition-colors">المميزات</a>
+                    <a href="#requirements" class="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary font-medium transition-colors">متطلبات التشغيل</a>
+                    
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fa-solid fa-sun hidden"></i>
+                    </button>
+                    
+                    <a href="#contact" class="bg-primary hover:bg-sky-600 text-white px-5 py-2 rounded-md font-medium transition-colors shadow-sm">تواصل معنا</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">
+                نظام <span class="text-primary">TQ Store</span> المتكامل
+                <br class="hidden md:block"> لإدارة المتاجر ونقاط البيع
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+                حل برمجي متطور مبني بأحدث تقنيات WinUI 3 و .NET. يوفر واجهة مستخدم عصرية وسريعة لإدارة المبيعات، المخزون، الحسابات، والتقارير الشاملة.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="bg-primary hover:bg-sky-600 text-white px-8 py-3 rounded-lg font-bold text-lg transition-colors shadow-lg shadow-sky-500/30 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> اطلب نسخة تجريبية
+                </a>
+                <a href="#features" class="bg-white dark:bg-dark-card border border-light-border dark:border-dark-border hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-800 dark:text-white px-8 py-3 rounded-lg font-bold text-lg transition-colors flex items-center justify-center">
+                    استكشف المميزات
+                </a>
+            </div>
+            
+            <!-- Dashboard Image Placeholder -->
+            <div class="mt-16 relative mx-auto max-w-5xl rounded-xl border border-light-border dark:border-dark-border shadow-2xl overflow-hidden bg-dark-card">
+                <div class="absolute top-0 w-full h-8 bg-gray-800 border-b border-gray-700 flex items-center px-4 gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <!-- Placeholder for the main dashboard screenshot you provided -->
+                <div class="pt-8 aspect-video flex items-center justify-center bg-[#1e2024]">
+                   <p class="text-gray-500 text-lg border-2 border-dashed border-gray-600 p-8 rounded-lg">
+                       [ضع صورة لوحة التحكم الرئيسية هنا - image_d4b5be.jpg]
+                   </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50 dark:bg-[#15171a] border-y border-light-border dark:border-dark-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">لماذا تختار TQ Store؟</h2>
+                <p class="text-gray-600 dark:text-gray-400">مميزات صُممت لتسهيل إدارة أعمالك بأعلى كفاءة</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white dark:bg-dark-card p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-colors shadow-sm">
+                    <div class="w-12 h-12 rounded-lg bg-sky-100 dark:bg-sky-900/30 text-primary flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-cash-register"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">نقاط بيع سريعة (POS)</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                        شاشة كاشير مصممة للسرعة، تدعم الباركود، الشاشات اللمسية، وتعدد طرق الدفع لتسريع عملية المحاسبة.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white dark:bg-dark-card p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-colors shadow-sm">
+                    <div class="w-12 h-12 rounded-lg bg-sky-100 dark:bg-sky-900/30 text-primary flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">إدارة المخزون بدقة</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                        تتبع حركة الأصناف، تنبيهات النواقص، جرد المخازن، وإدارة تواريخ الصلاحية للأصناف بكل سهولة.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white dark:bg-dark-card p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-colors shadow-sm">
+                    <div class="w-12 h-12 rounded-lg bg-sky-100 dark:bg-sky-900/30 text-primary flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">تقارير شاملة</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                        لوحة تحكم تفاعلية توضح الأداء خلال الفترة، صافي الأرباح، المبيعات، المصروفات، وأكثر الأصناف نشاطاً.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-white dark:bg-dark-card p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-colors shadow-sm">
+                    <div class="w-12 h-12 rounded-lg bg-sky-100 dark:bg-sky-900/30 text-primary flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">صلاحيات المستخدمين</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                        نظام متقدم لتحديد صلاحيات كل مستخدم (مدير، كاشير، محاسب) لحماية بياناتك والتحكم في الوصول للشاشات.
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-white dark:bg-dark-card p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-colors shadow-sm">
+                    <div class="w-12 h-12 rounded-lg bg-sky-100 dark:bg-sky-900/30 text-primary flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">واجهة WinUI عصرية</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                        تصميم أنيق متوافق مع Windows 11، يدعم الوضعين الداكن والفاتح، لراحة العين وسهولة الاستخدام لفترات طويلة.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-white dark:bg-dark-card p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-colors shadow-sm">
+                    <div class="w-12 h-12 rounded-lg bg-sky-100 dark:bg-sky-900/30 text-primary flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">إعدادات مرنة</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                        تخصيص كامل للنظام: تصميم الفواتير، إعدادات الضرائب، موازين الباركود، وإعدادات الطابعات الحرارية.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- UI Showcase Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">واجهة إعدادات احترافية</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                        نظام TQ Store يوفر لك تحكم كامل في كل تفصيلة. من خلال شاشة الإعدادات المنظمة، يمكنك:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span class="text-gray-700 dark:text-gray-300">تخصيص سلوك شاشة البيع (الكميات اليدوية، التحقق عند الاسترجاع).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span class="text-gray-700 dark:text-gray-300">تفعيل لوحات المفاتيح والأرقام اللمسية لشاشات التاتش.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span class="text-gray-700 dark:text-gray-300">ضبط إعدادات ميزان الباركود ورسوم التوصيل تلقائياً.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rounded-xl border border-light-border dark:border-dark-border shadow-xl overflow-hidden bg-dark-card flex items-center justify-center p-2">
+                    <!-- Placeholder for Settings Image -->
+                    <div class="aspect-video w-full flex items-center justify-center bg-[#1e2024] border-2 border-dashed border-gray-600 rounded">
+                        <p class="text-gray-500 text-center">
+                            [ضع صورة الإعدادات هنا - image_d4b5fd.png]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section id="requirements" class="py-20 bg-gray-50 dark:bg-[#15171a] border-y border-light-border dark:border-dark-border">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">متطلبات التشغيل</h2>
+                <p class="text-gray-600 dark:text-gray-400">نظام TQ Store مصمم ليعمل بكفاءة على الأجهزة الحديثة</p>
+            </div>
+            
+            <div class="bg-white dark:bg-dark-card rounded-xl border border-light-border dark:border-dark-border overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right">
+                        <thead class="bg-gray-100 dark:bg-gray-800/50 border-b border-light-border dark:border-dark-border text-gray-700 dark:text-gray-300">
+                            <tr>
+                                <th class="py-4 px-6 font-semibold">البند</th>
+                                <th class="py-4 px-6 font-semibold">الحد الأدنى</th>
+                                <th class="py-4 px-6 font-semibold">الموصى به</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-light-border dark:divide-dark-border text-gray-600 dark:text-gray-400">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                                <td class="py-4 px-6 font-medium text-gray-800 dark:text-gray-200">نظام التشغيل</td>
+                                <td class="py-4 px-6">Windows 10 (إصدار 1809 أو أحدث)</td>
+                                <td class="py-4 px-6 text-primary">Windows 11 (22H2 أو أحدث)</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                                <td class="py-4 px-6 font-medium text-gray-800 dark:text-gray-200">المعالج</td>
+                                <td class="py-4 px-6">ثنائي النواة 2 GHz</td>
+                                <td class="py-4 px-6 text-primary">رباعي النواة (Core i5 / Ryzen 5)</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                                <td class="py-4 px-6 font-medium text-gray-800 dark:text-gray-200">الذاكرة (RAM)</td>
+                                <td class="py-4 px-6">4 GB</td>
+                                <td class="py-4 px-6 text-primary">8 GB إلى 16 GB</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                                <td class="py-4 px-6 font-medium text-gray-800 dark:text-gray-200">قاعدة البيانات</td>
+                                <td class="py-4 px-6" colspan="2">SQL Server 2016 Express أو أحدث</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                                <td class="py-4 px-6 font-medium text-gray-800 dark:text-gray-200">إطار العمل</td>
+                                <td class="py-4 px-6" colspan="2">.NET 10.0 (مضمن داخل البرنامج)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Footer / Contact -->
+    <footer id="contact" class="bg-white dark:bg-dark-card border-t border-light-border dark:border-dark-border pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold mb-6">هل أنت مستعد لتطوير إدارة متجرك؟</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                تواصل معنا الآن للحصول على نسخة تجريبية، أو للاستفسار عن أسعار النسخ المرخصة وخدمات الدعم الفني.
+            </p>
+            
+            <div class="inline-flex flex-col sm:flex-row items-center gap-4 bg-gray-50 dark:bg-[#1a1d21] p-6 rounded-2xl border border-light-border dark:border-dark-border mb-12">
+                <div class="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-xl font-bold text-gray-600 dark:text-gray-300">
+                    MG
+                </div>
+                <div class="text-right">
+                    <h3 class="font-bold text-lg">Mazen Esam Gaber</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">مطور برمجيات سطح المكتب .NET / C#</p>
+                    <div class="flex gap-4">
+                        <a href="https://wa.me/201067041806" target="_blank" class="text-primary hover:text-sky-600 transition-colors flex items-center gap-1">
+                            <i class="fa-brands fa-whatsapp"></i> +20 106 704 1806
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-light-border dark:border-dark-border pt-8 text-sm text-gray-500 dark:text-gray-500">
+                <p>&copy; 2026 TQ Store. جميع الحقوق محفوظة.</p>
+                <p class="mt-2">صُنع بواسطة Mazen Gaber</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Check initial theme
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        // Toggle theme
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
 </body>
 </html>
