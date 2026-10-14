@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TQ Store — نظام نقاط البيع وإدارة المتاجر</title>
-<meta name="description" content="TQ Store نظام متكامل لنقاط البيع وإدارة المتاجر والسوبر ماركت: مبيعات، مخزون، خزينة وبنوك، ورديات، تقارير، صلاحيات، تصنيع، كروت ولاء وتقسيط — بتصميم ويندوز 11 الأصلي.">
+<meta name="description" content="TQ Store نظام متكامل لنقاط البيع وإدارة المتاجر والسوبر ماركت: مبيعات، مخزون، خزينة وبنوك، ورديات، تقارير، صلاحيات، تصنيع وتقسيط — بالعربي والإنجليزي.">
 <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
 <meta property="og:title" content="TQ Store — نظام نقاط البيع وإدارة المتاجر">
@@ -12,6 +12,10 @@
 <meta property="og:image" content="https://systemtq.com/images/dashboard-dark.jpg">
 <meta property="og:url" content="https://systemtq.com/">
 <link rel="icon" href="images/favicon.ico">
+<link rel="alternate" hreflang="ar" href="https://systemtq.com/">
+<link rel="alternate" hreflang="en" href="https://systemtq.com/en/">
+<!-- where the setup is published: a GitHub Releases address ending in /releases/latest/download/ -->
+<meta name="tq-release" content="https://github.com/YOUR-GITHUB/YOUR-REPO/releases/latest/download/">
 <link rel="apple-touch-icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -241,6 +245,7 @@ p { margin: 0; }
   .nav-links a.active::after { inset-inline: auto 0; top: 30%; bottom: 30%; width: 3px; height: auto; }
   .menu-btn { display: inline-flex; }
   .nav .hide-sm { display: none; }
+  .nav-links .lang-link { display: block !important; }
 }
 
 /* ============================================================================================ hero */
@@ -654,6 +659,7 @@ footer .links a { color: var(--text-2) !important; }
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
+  .nav-links .lang-link { display: none; }
 </style>
 </head>
 
@@ -676,9 +682,11 @@ footer .links a { color: var(--text-2) !important; }
       <a href="#requirements">المتطلبات</a>
       <a href="#faq">الأسئلة الشائعة</a>
       <a href="#contact">تواصل معنا</a>
+      <a href="en/" hreflang="en" lang="en" class="lang-link">English</a>
     </nav>
 
     <div class="nav-actions">
+      <a class="btn subtle hide-sm" href="en/" hreflang="en" lang="en" title="English version"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i>English</a>
       <button class="btn subtle icon" id="themeBtn" aria-label="تبديل الوضع الفاتح / الداكن" title="الوضع الفاتح / الداكن">
         <i class="ic" id="themeIcon"></i>
       </button>
@@ -695,7 +703,7 @@ footer .links a { color: var(--text-2) !important; }
 <!-- ================================================================================================ HERO -->
 <section class="hero">
   <div class="container">
-    <span class="chip reveal"><span class="dot"></span>الإصدار 1.0 متاح الآن — تجربة مجانية 14 يومًا</span>
+    <a class="chip reveal" href="#new" style="text-decoration:none;color:inherit"><span class="dot"></span>الإصدار 1.1 متاح الآن — عربي وإنجليزي، والبيع مستمر حتى لو توقف الخادم</a>
     <h1 class="reveal">إدارة متجرك بالكامل،<br><span class="grad">بسرعة الكاشير ودقة المحاسب</span></h1>
     <p class="lead reveal">
       TQ Store نظام متكامل للسوبر ماركت والمحلات التجارية: بيع بالباركود واللمس، مخزون حيّ، خزائن وبنوك ومحافظ إلكترونية،
@@ -708,7 +716,7 @@ footer .links a { color: var(--text-2) !important; }
     <div class="meta reveal">
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>يعمل بدون إنترنت</span>
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>عدة أجهزة كاشير على شبكة واحدة</span>
-      <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>عربي بالكامل</span>
+      <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>عربي وإنجليزي</span>
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>تحديثات تلقائية</span>
     </div>
 
@@ -861,6 +869,48 @@ footer .links a { color: var(--text-2) !important; }
 </section>
 
 <!-- ================================================================================================ MODULES -->
+<section id="new" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/sparkle_24_regular.svg)"></i>الجديد في الإصدار 1.1</span>
+      <h2>أهم الإضافات في هذا الإصدار</h2>
+      <p>كل إضافة هنا جاءت من طلب حقيقي من أصحاب المحلات — ومتاحة مجانًا لكل من لديه تحديثات.</p>
+    </div>
+    <div class="modules">
+      <article class="card module reveal" style="--c:#0078d4;--c2:#4cc2ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i></span><h3>واجهة إنجليزية كاملة بجانب العربي</h3></div>
+        <p>كل الشاشات والرسائل والتقارير بالإنجليزي من اليسار لليمين، وتغيير اللغة من الإعدادات أو من شاشة الدخول بضغطة.</p>
+        <ul><li>عربي / English</li><li>بدون فقد بيانات</li><li>أسماء افتراضية بلغتك</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#107c10;--c2:#6ccb5f">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/plug_disconnected_24_regular.svg)"></i></span><h3>البيع مستمر حتى لو توقف الخادم</h3></div>
+        <p>لو انقطع الاتصال بجهاز الخادم يكمل الكاشير البيع من نسخة الأصناف على جهازه، وتُرحَّل الفواتير تلقائيًا عند رجوع الاتصال — بدون تكرار.</p>
+        <ul><li>دخول بدون اتصال</li><li>ترحيل تلقائي</li><li>مراجعة المدير</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#8764b8;--c2:#b4a0ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/print_24_regular.svg)"></i></span><h3>لغة الفاتورة كما تريد</h3></div>
+        <p>فاتورة البيع وتقرير إغلاق الوردية يُطبعان بالعربي أو الإنجليزي حسب الإعداد، مع زر لتغيير لغة أي فاتورة من شاشة المعاينة.</p>
+        <ul><li>80مم و A4</li><li>عربي / English</li><li>معاينة فورية</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#ca5010;--c2:#ffaa44">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/scales_24_regular.svg)"></i></span><h3>الوزن والميزان الإلكتروني</h3></div>
+        <p>ميزان طاولة متصل بالجهاز يقرأ الوزن مباشرة، وأوزان جاهزة بلمسة (ربع، نص، كيلو…) أو الوزن حسب المبلغ، بجانب باركود الميزان.</p>
+        <ul><li>ميزان COM / USB</li><li>أوزان جاهزة</li><li>باركود الميزان</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#c239b3;--c2:#ff8ad8">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/flash_24_regular.svg)"></i></span><h3>تجهيز أسرع للمحل</h3></div>
+        <p>معالج أول تشغيل يجهّز بيانات النشاط والعملة والطباعة، وشاشة «إضافة سريعة للأصناف» لإدخال مئات الأصناف بالباركود بسرعة.</p>
+        <ul><li>معالج التشغيل</li><li>إضافة سريعة</li><li>استيراد إكسيل</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#0063b1;--c2:#62b7ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_sync_24_regular.svg)"></i></span><h3>تحديثات تلقائية مع الترخيص</h3></div>
+        <p>ترخيصك يحدد مكان التحديثات: البرنامج ينزّل الإصدار الجديد في الخلفية ويثبّته عند الإغلاق — والمثبّت يفحص الويندوز ويوضح المطلوب لو غير مناسب.</p>
+        <ul><li>تنزيل في الخلفية</li><li>موقّعة رقميًا</li><li>فحص الويندوز</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section id="modules" style="padding-top:40px">
   <div class="container">
     <div class="section-head reveal">
@@ -1137,17 +1187,18 @@ footer .links a { color: var(--text-2) !important; }
         <h2 style="margin-top:18px">ابدأ الآن مع TQ Store</h2>
         <p>حمّل المثبّت، اختر «جهاز الخادم» على جهازك الرئيسي، وابدأ البيع في دقائق. عند التفعيل لا تفقد أي بيانات أدخلتها أثناء التجربة.</p>
         <div class="ctas">
-          <a class="btn accent lg" id="dlBtn" href="downloads/TQStore-Setup-1.0.0.exe" download><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>تحميل TQ Store لويندوز</a>
+          <a class="btn accent lg" id="dlBtn" href="downloads/TQStore-Setup.exe" download><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>تحميل TQ Store لويندوز</a>
           <a class="btn ghost lg" href="https://wa.me/201067041806?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20TQ%20Store" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8m8.4-18.2C18.1 1.4 15.2.2 12 .2 5.5.2.2 5.5.2 12c0 2.1.5 4.1 1.6 5.9L.1 23.9l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3"/></svg>اطلب عرضًا أو سعر الترخيص</a>
         </div>
       </div>
       <div class="dl-card">
-        <div class="file"><img src="images/logo.png" alt=""><div><b>TQStore-Setup-1.0.0.exe</b><span>مثبّت ويندوز 64 بت · تقريبًا 80 ميجابايت</span></div></div>
+        <div class="file"><img src="images/logo.png" alt=""><div><b>TQStore-Setup.exe</b><span>مثبّت ويندوز 64 بت · تقريبًا 80 ميجابايت</span></div></div>
         <dl>
-          <dt>الإصدار</dt><dd>1.0.0</dd>
+          <dt>الإصدار</dt><dd>1.1.0</dd>
           <dt>يدعم</dt><dd>Windows 10 (1809+) و Windows 11 — x64</dd>
           <dt>يتضمّن</dt><dd>البرنامج، قاعدة البيانات (للخادم)، المكوّنات المطلوبة</dd>
-          <dt>التحديثات</dt><dd>تلقائية من داخل البرنامج، وموقّعة رقميًا</dd>
+          <dt>اللغة</dt><dd>العربية و English</dd>
+          <dt>التحديثات</dt><dd>تلقائية مع الترخيص، وموقّعة رقميًا</dd>
         </dl>
       </div>
     </div>
@@ -1162,9 +1213,17 @@ footer .links a { color: var(--text-2) !important; }
       <h2>كل ما تريد معرفته قبل البدء</h2>
     </div>
     <div class="faq">
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i>هل يوجد البرنامج بالإنجليزي؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>نعم. من الإصدار 1.1 تختار لغة البرنامج (العربية أو English) لكل جهاز من الإعدادات أو من شاشة الدخول، وتختار لغة الفاتورة المطبوعة وتقرير إغلاق الوردية مستقلة عن لغة البرنامج.</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/plug_disconnected_24_regular.svg)"></i>ماذا يحدث لو توقف جهاز الخادم أثناء البيع؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>يظهر تنبيه بانقطاع الاتصال ويكمل الكاشير البيع النقدي من نسخة الأصناف والأسعار المحفوظة على جهازه، حتى لو أعاد تشغيل البرنامج. عند رجوع الاتصال تُرحَّل الفواتير تلقائيًا للخادم مرة واحدة فقط، وأي فاتورة مشكوك فيها تظهر للمدير لمراجعتها.</div>
+      </details>
       <details class="card reveal" open>
         <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_sync_24_regular.svg)"></i>هل يعمل البرنامج بدون إنترنت؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
-        <div>نعم، بالكامل. البيع والمخزون والحسابات والتقارير كلها تعمل على شبكة المحل المحلية. الإنترنت يُستخدم فقط للتحديثات والمزامنة السحابية الاختيارية ورسائل واتساب.</div>
+        <div>نعم، بالكامل. البيع والمخزون والحسابات والتقارير كلها تعمل على شبكة المحل المحلية. الإنترنت يُستخدم فقط للتحديثات والمزامنة السحابية الاختيارية ورسائل واتساب. وحتى لو توقف جهاز الخادم نفسه، يكمل الكاشير البيع من جهازه وتُرحَّل الفواتير تلقائيًا عند رجوع الاتصال.</div>
       </details>
       <details class="card reveal">
         <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/phone_desktop_24_regular.svg)"></i>كم جهاز كاشير أستطيع تشغيله؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
@@ -1184,7 +1243,7 @@ footer .links a { color: var(--text-2) !important; }
       </details>
       <details class="card reveal">
         <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>كيف تصلني التحديثات؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
-        <div>البرنامج يتحقق من التحديثات تلقائيًا ويظهر لك «تحديث متاح». التحديث موقّع رقميًا فلا يمكن لأحد دفع نسخة مزيفة، ويُثبَّت بضغطة ثم يُعاد فتح البرنامج تلقائيًا.</div>
+        <div>رابط التحديثات مسجّل داخل ترخيصك، فلا تحتاج أي إعداد. مع التحديثات التلقائية ينزّل البرنامج الإصدار الجديد في الخلفية ويثبّته عند إغلاقه، أو تثبّته فورًا من «تحديث متاح». التحديث موقّع رقميًا فلا يمكن لأحد دفع نسخة مزيفة.</div>
       </details>
       <details class="card reveal">
         <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/scales_24_regular.svg)"></i>هل يناسب نشاطي؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
@@ -1311,7 +1370,7 @@ footer .links a { color: var(--text-2) !important; }
     menuBtn.setAttribute('aria-expanded', open);
   });
   links.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { links.classList.remove('open'); }); });
-  var sections = Array.prototype.map.call(links.querySelectorAll('a'), function (a) { return document.querySelector(a.getAttribute('href')); });
+  var sections = Array.prototype.map.call(links.querySelectorAll('a[href^="#"]'), function (a) { return document.querySelector(a.getAttribute('href')); });
   var spy = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
@@ -1444,6 +1503,15 @@ footer .links a { color: var(--text-2) !important; }
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
+</script>
+<script>
+  // the setup lives on GitHub Releases (no size limit there); until <meta name="tq-release"> is filled in, the local copy is used
+  (function () {
+    var m = document.querySelector('meta[name="tq-release"]');
+    var base = m && m.content;
+    if (!base || base.indexOf('YOUR-GITHUB') >= 0) return;
+    document.querySelectorAll('a[href$="TQStore-Setup.exe"]').forEach(function (a) { a.href = base + 'TQStore-Setup.exe'; });
+  })();
 </script>
 </body>
 </html>
