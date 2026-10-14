@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TQ Store — نظام نقاط البيع وإدارة المتاجر</title>
+<meta name="description" content="TQ Store نظام متكامل لنقاط البيع وإدارة المتاجر والسوبر ماركت: مبيعات، مخزون، خزينة وبنوك، ورديات، تقارير، صلاحيات، تصنيع وتقسيط — بالعربي والإنجليزي.">
+<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
+<meta property="og:title" content="TQ Store — نظام نقاط البيع وإدارة المتاجر">
+<meta property="og:description" content="سرعة الكاشير، دقة المخزون، ووضوح الحسابات — في برنامج واحد.">
+<meta property="og:image" content="https://systemtq.com/images/dashboard-dark.jpg">
+<meta property="og:url" content="https://systemtq.com/">
+<link rel="icon" href="images/favicon.ico">
+<link rel="alternate" hreflang="ar" href="https://systemtq.com/">
+<link rel="alternate" hreflang="en" href="https://systemtq.com/en/">
+<!-- where the setup is published: a GitHub Releases address ending in /releases/latest/download/ -->
+<meta name="tq-release" content="https://github.com/YOUR-GITHUB/YOUR-REPO/releases/latest/download/">
+<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+  /* theme before first paint: saved choice, else the system's */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('tq-theme'); } catch (e) {}
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+
+<style>
+/* ============================================================================================
+   Fluent / WinUI 3 design tokens (Windows 11 light + dark)
+   ============================================================================================ */
+:root {
+  --font: "Segoe UI Variable Text", "Segoe UI", "IBM Plex Sans Arabic", Tahoma, system-ui, sans-serif;
+  --font-display: "Segoe UI Variable Display", "Segoe UI", "IBM Plex Sans Arabic", Tahoma, system-ui, sans-serif;
+  --icons: "https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/";
+
+  --radius-s: 4px;
+  --radius: 8px;
+  --radius-l: 12px;
+  --radius-xl: 20px;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --container: 1240px;
+}
+
+[data-theme="light"] {
+  --bg: #f3f5f9;
+  --bg-mica-1: #e9eef8;
+  --bg-mica-2: #f5f0f7;
+  --layer: rgba(255, 255, 255, .5);
+  --card: rgba(255, 255, 255, .78);
+  --card-solid: #ffffff;
+  --card-hover: rgba(255, 255, 255, .95);
+  --card-secondary: rgba(246, 246, 246, .6);
+  --stroke: rgba(0, 0, 0, .0578);
+  --stroke-strong: rgba(0, 0, 0, .1);
+  --divider: rgba(0, 0, 0, .0803);
+  --text: #1a1a1a;
+  --text-2: rgba(0, 0, 0, .62);
+  --text-3: rgba(0, 0, 0, .45);
+  --accent: #005fb8;
+  --accent-hover: #0067c0;
+  --accent-text: #003e92;
+  --accent-soft: rgba(0, 95, 184, .09);
+  --on-accent: #ffffff;
+  --success: #0f7b0f;
+  --success-soft: rgba(15, 123, 15, .1);
+  --caution: #9d5d00;
+  --shadow: 0 2px 4px rgba(0, 0, 0, .04), 0 8px 24px rgba(0, 0, 0, .06);
+  --shadow-l: 0 8px 16px rgba(0, 0, 0, .08), 0 32px 64px rgba(0, 0, 0, .12);
+  --acrylic: rgba(249, 249, 249, .72);
+  --hero-glow: rgba(0, 120, 212, .16);
+  --control: rgba(255, 255, 255, .7);
+  --control-hover: rgba(249, 249, 249, .5);
+  --code-bg: rgba(0, 0, 0, .04);
+}
+
+[data-theme="dark"] {
+  --bg: #0f131a;
+  --bg-mica-1: #121a29;
+  --bg-mica-2: #17131f;
+  --layer: rgba(58, 58, 58, .3);
+  --card: rgba(255, 255, 255, .0512);
+  --card-solid: #1f232a;
+  --card-hover: rgba(255, 255, 255, .0837);
+  --card-secondary: rgba(255, 255, 255, .0326);
+  --stroke: rgba(255, 255, 255, .0698);
+  --stroke-strong: rgba(255, 255, 255, .12);
+  --divider: rgba(255, 255, 255, .0837);
+  --text: #ffffff;
+  --text-2: rgba(255, 255, 255, .786);
+  --text-3: rgba(255, 255, 255, .544);
+  --accent: #60cdff;
+  --accent-hover: #5abce9;
+  --accent-text: #99ebff;
+  --accent-soft: rgba(96, 205, 255, .1);
+  --on-accent: #000000;
+  --success: #6ccb5f;
+  --success-soft: rgba(108, 203, 95, .12);
+  --caution: #fce100;
+  --shadow: 0 2px 4px rgba(0, 0, 0, .26), 0 8px 24px rgba(0, 0, 0, .3);
+  --shadow-l: 0 8px 16px rgba(0, 0, 0, .3), 0 32px 64px rgba(0, 0, 0, .5);
+  --acrylic: rgba(32, 36, 44, .78);
+  --hero-glow: rgba(96, 205, 255, .14);
+  --control: rgba(255, 255, 255, .0605);
+  --control-hover: rgba(255, 255, 255, .0837);
+  --code-bg: rgba(255, 255, 255, .06);
+}
+
+/* ============================================================================================ base */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color .35s var(--ease), color .35s var(--ease);
+}
+/* Mica: the soft, slightly tinted wallpaper glow behind every surface */
+body::before {
+  content: "";
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(1200px 700px at 85% -10%, var(--bg-mica-1), transparent 60%),
+    radial-gradient(900px 600px at 0% 30%, var(--bg-mica-2), transparent 60%),
+    radial-gradient(900px 700px at 100% 100%, var(--bg-mica-1), transparent 60%),
+    var(--bg);
+  transition: background .35s var(--ease);
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent-text); text-decoration: none; }
+[data-theme="light"] a { color: var(--accent); }
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.3; margin: 0; font-weight: 600; letter-spacing: -.01em; }
+p { margin: 0; }
+.container { width: min(var(--container), 100% - 40px); margin-inline: auto; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+::selection { background: var(--accent); color: var(--on-accent); }
+
+/* Fluent System Icons through a mask: they take the text colour, like Segoe Fluent Icons */
+.ic {
+  display: inline-block; width: 20px; height: 20px; flex: none;
+  background: currentColor;
+  -webkit-mask: var(--i) center / contain no-repeat;
+          mask: var(--i) center / contain no-repeat;
+}
+.ic.l { width: 24px; height: 24px; }
+.ic.xl { width: 28px; height: 28px; }
+
+/* ============================================================================================ controls */
+.btn {
+  --h: 40px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: var(--h); padding: 0 18px;
+  border-radius: var(--radius-s);
+  font: 600 15px/1 var(--font);
+  border: 1px solid var(--stroke-strong);
+  background: var(--control); color: var(--text);
+  cursor: pointer; white-space: nowrap;
+  transition: background .15s, transform .15s var(--ease), box-shadow .2s, border-color .2s;
+}
+.btn:hover { background: var(--control-hover); }
+.btn:active { transform: scale(.98); }
+.btn:focus-visible, a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.btn.accent {
+  background: var(--accent); color: var(--on-accent);
+  border-color: transparent;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .2), 0 6px 18px -6px var(--accent);
+}
+[data-theme="light"] .btn.accent { color: #fff; }
+.btn.accent:hover { background: var(--accent-hover); }
+.btn.lg { --h: 52px; padding: 0 28px; font-size: 16px; border-radius: 6px; }
+.btn.subtle { background: transparent; border-color: transparent; }
+.btn.subtle:hover { background: var(--card-hover); }
+.btn.icon { width: var(--h); padding: 0; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--stroke);
+  font-size: 13.5px; color: var(--text-2);
+  backdrop-filter: blur(20px);
+}
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 0 var(--stroke);
+  backdrop-filter: blur(30px) saturate(140%);
+  -webkit-backdrop-filter: blur(30px) saturate(140%);
+}
+
+/* ============================================================================================ nav (acrylic title bar) */
+.nav {
+  position: fixed; top: 0; inset-inline: 0; z-index: 50;
+  background: var(--acrylic);
+  backdrop-filter: blur(40px) saturate(160%);
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s, background .3s;
+}
+.nav.scrolled { border-bottom-color: var(--divider); }
+.nav .inner { height: 64px; display: flex; align-items: center; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 12px; color: var(--text) !important; font-weight: 700; font-size: 18px; }
+.brand img { width: 34px; height: 34px; border-radius: 8px; box-shadow: 0 4px 12px -4px rgba(0, 95, 184, .6); }
+.brand small { display: block; font-weight: 400; font-size: 12px; color: var(--text-3); line-height: 1.2; }
+.nav-links { display: flex; gap: 2px; margin-inline-start: auto; }
+.nav-links a {
+  position: relative;
+  padding: 8px 12px; border-radius: var(--radius-s);
+  color: var(--text-2) !important; font-size: 14.5px;
+  transition: background .15s, color .15s;
+}
+.nav-links a:hover { background: var(--card-hover); color: var(--text) !important; }
+.nav-links a.active { color: var(--text) !important; }
+.nav-links a.active::after {
+  content: ""; position: absolute; inset-inline: 40%; bottom: 2px; height: 3px; border-radius: 3px; background: var(--accent);
+}
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.menu-btn { display: none; }
+
+@media (max-width: 1080px) {
+  .nav-links {
+    position: fixed; top: 64px; inset-inline: 12px;
+    flex-direction: column; padding: 8px;
+    background: var(--acrylic); backdrop-filter: blur(40px) saturate(160%); -webkit-backdrop-filter: blur(40px) saturate(160%);
+    border: 1px solid var(--stroke-strong); border-radius: var(--radius);
+    box-shadow: var(--shadow-l);
+    opacity: 0; transform: translateY(-8px); pointer-events: none;
+    transition: opacity .2s, transform .25s var(--ease);
+  }
+  .nav-links.open { opacity: 1; transform: none; pointer-events: auto; }
+  .nav-links a { padding: 12px 14px; }
+  .nav-links a.active::after { inset-inline: auto 0; top: 30%; bottom: 30%; width: 3px; height: auto; }
+  .menu-btn { display: inline-flex; }
+  .nav .hide-sm { display: none; }
+  .nav-links .lang-link { display: block !important; }
+}
+
+/* ============================================================================================ hero */
+.hero { position: relative; padding: 140px 0 40px; text-align: center; }
+.hero::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 900px; z-index: -1;
+  background: radial-gradient(700px 420px at 50% 22%, var(--hero-glow), transparent 70%);
+}
+.hero h1 {
+  font-size: clamp(36px, 6vw, 68px);
+  font-weight: 700; letter-spacing: -.02em; line-height: 1.2;
+  margin: 22px auto 18px; max-width: 980px;
+}
+.grad {
+  background: linear-gradient(120deg, #0078d4 0%, #2b88d8 30%, #4cc2ff 60%, #8a7cf0 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero .lead { font-size: clamp(17px, 2vw, 20px); color: var(--text-2); max-width: 760px; margin: 0 auto 34px; }
+.hero .ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero .meta { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; margin-top: 22px; color: var(--text-3); font-size: 14px; }
+.hero .meta span { display: inline-flex; align-items: center; gap: 6px; }
+.hero .meta .ic { width: 16px; height: 16px; color: var(--success); }
+
+/* the product in a Windows 11 window */
+.window {
+  position: relative;
+  margin: 64px auto 0; max-width: 1180px;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--stroke-strong);
+  background: var(--card-solid);
+  box-shadow: var(--shadow-l), 0 0 0 1px rgba(0, 0, 0, .04);
+  overflow: hidden;
+  transform-origin: 50% 0;
+}
+.window .titlebar {
+  height: 36px; display: flex; align-items: center; gap: 10px; padding-inline: 14px 0;
+  background: var(--card-secondary); border-bottom: 1px solid var(--divider);
+  font-size: 12.5px; color: var(--text-2);
+  direction: rtl;
+}
+.window .titlebar img { width: 16px; height: 16px; border-radius: 4px; }
+.window .caps { margin-inline-start: auto; display: flex; height: 100%; direction: ltr; }
+.window .caps i {
+  width: 46px; height: 100%; display: grid; place-items: center; color: var(--text-2);
+}
+.window .caps i::before { content: ""; width: 10px; height: 10px; }
+.window .caps .min::before { height: 1px; background: currentColor; }
+.window .caps .max::before { border: 1px solid currentColor; border-radius: 2px; }
+.window .caps .cls::before {
+  width: 12px; height: 12px;
+  background: linear-gradient(45deg, transparent 46%, currentColor 46%, currentColor 54%, transparent 54%),
+              linear-gradient(-45deg, transparent 46%, currentColor 46%, currentColor 54%, transparent 54%);
+}
+.window img.shot { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; background: var(--card-secondary); }
+#heroWindow { overflow: visible; }
+#heroWindow .titlebar { border-radius: var(--radius-l) var(--radius-l) 0 0; }
+#heroWindow img.shot { border-radius: 0 0 var(--radius-l) var(--radius-l); }
+
+.float-card {
+  position: absolute; z-index: 2;
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: var(--radius);
+  background: var(--acrylic); backdrop-filter: blur(30px) saturate(150%); -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid var(--stroke-strong); box-shadow: var(--shadow-l);
+  text-align: start; font-size: 13px; color: var(--text-2);
+  animation: float 6s ease-in-out infinite;
+}
+.float-card b { display: block; color: var(--text); font-size: 18px; font-family: var(--font-display); }
+.float-card .bubble { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.float-card.f1 { top: 22%; inset-inline-start: -46px; }
+.float-card.f2 { bottom: 14%; inset-inline-end: -40px; animation-delay: -3s; }
+.float-card.f2 .bubble { background: var(--success-soft); color: var(--success); }
+@keyframes float { 50% { transform: translateY(-10px); } }
+@media (max-width: 1280px) { .float-card { display: none; } }
+
+/* ============================================================================================ strip of facts */
+.facts { padding: 56px 0 24px; }
+.facts .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.fact { padding: 22px; display: flex; gap: 14px; align-items: center; }
+.fact .ic { color: var(--accent); }
+.fact b { display: block; font-size: 22px; font-family: var(--font-display); }
+.fact span { color: var(--text-2); font-size: 14px; }
+@media (max-width: 900px) { .facts .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .facts .grid { grid-template-columns: 1fr; } }
+
+/* ============================================================================================ sections */
+section { padding: 96px 0; }
+.section-head { text-align: center; max-width: 780px; margin: 0 auto 52px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13.5px; font-weight: 600; color: var(--accent);
+  padding: 4px 12px; border-radius: 999px; background: var(--accent-soft);
+  margin-bottom: 16px;
+}
+.eyebrow .ic { width: 16px; height: 16px; }
+.section-head h2 { font-size: clamp(28px, 4vw, 44px); margin-bottom: 14px; }
+.section-head p { color: var(--text-2); font-size: 18px; }
+
+/* ============================================================================================ tour (SelectorBar + preview) */
+.selector {
+  display: flex; gap: 4px; justify-content: center; flex-wrap: wrap;
+  padding: 4px; margin: 0 auto 28px; width: fit-content; max-width: 100%;
+  background: var(--card); border: 1px solid var(--stroke); border-radius: 999px;
+}
+.selector button {
+  position: relative; display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px; border-radius: 999px; border: 0;
+  background: transparent; color: var(--text-2);
+  font: 500 14.5px var(--font); cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.selector button:hover { background: var(--card-hover); color: var(--text); }
+.selector button[aria-selected="true"] { background: var(--card-solid); color: var(--text); box-shadow: var(--shadow); }
+.selector button[aria-selected="true"] .ic { color: var(--accent); }
+.selector .ic { width: 18px; height: 18px; }
+
+.tour { display: grid; grid-template-columns: 1.65fr 1fr; gap: 28px; align-items: start; }
+.tour .preview { overflow: hidden; border-radius: var(--radius-l); }
+.tour .preview .titlebar { border-radius: var(--radius-l) var(--radius-l) 0 0; }
+.tour .preview img { cursor: zoom-in; transition: opacity .25s; }
+.tour .explain { padding: 30px; }
+.tour .explain h3 { font-size: 26px; margin-bottom: 10px; }
+.tour .explain > p { color: var(--text-2); margin-bottom: 18px; }
+.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.checks li { display: flex; gap: 12px; align-items: flex-start; color: var(--text-2); font-size: 15px; line-height: 1.7; }
+.checks li b { color: var(--text); font-weight: 600; }
+.checks .tick {
+  flex: none; width: 22px; height: 22px; margin-top: 2px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--success-soft); color: var(--success);
+}
+.checks .tick .ic { width: 14px; height: 14px; }
+.tour-panel { display: none; }
+.tour-panel.on { display: contents; }
+.tour-panel.on > * { animation: rise .45s var(--ease) both; }
+.tour-panel.on > :nth-child(2) { animation-delay: .06s; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@media (max-width: 980px) { .tour { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .selector { border-radius: 14px; } .selector button { flex: 1 1 40%; justify-content: center; } }
+
+/* ============================================================================================ modules */
+.modules { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.module { padding: 24px; transition: background .2s, transform .25s var(--ease), border-color .2s; }
+.module:hover { background: var(--card-hover); transform: translateY(-3px); border-color: var(--stroke-strong); }
+.module .head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.module .tile {
+  width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center;
+  color: #fff; box-shadow: 0 6px 16px -6px var(--c, #0078d4);
+  background: linear-gradient(135deg, var(--c, #0078d4), var(--c2, #4cc2ff));
+}
+.module h3 { font-size: 18px; }
+.module p { color: var(--text-2); font-size: 14.5px; line-height: 1.75; }
+.module ul { margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.module li { font-size: 12.5px; color: var(--text-2); padding: 3px 10px; border-radius: 999px; background: var(--card-secondary); border: 1px solid var(--stroke); }
+
+/* ============================================================================================ spotlight rows */
+.spot { display: grid; grid-template-columns: 1fr 1.25fr; gap: 56px; align-items: center; padding: 40px 0; }
+.spot.flip { grid-template-columns: 1.25fr 1fr; }
+.spot.flip .spot-text { order: 2; }
+.spot-text h3 { font-size: clamp(24px, 3vw, 34px); margin: 14px 0 14px; }
+.spot-text > p { color: var(--text-2); font-size: 17px; margin-bottom: 22px; }
+.spot-media { position: relative; }
+.spot-media .frame { overflow: hidden; border-radius: var(--radius-l); border: 1px solid var(--stroke-strong); box-shadow: var(--shadow-l); background: var(--card-solid); }
+.spot-media img { width: 100%; cursor: zoom-in; }
+.spot-media .halo { position: absolute; inset: 10% -6% -8%; z-index: -1; filter: blur(60px); opacity: .55;
+  background: radial-gradient(closest-side, var(--hero-glow), transparent); }
+@media (max-width: 980px) {
+  .spot, .spot.flip { grid-template-columns: 1fr; gap: 28px; }
+  .spot.flip .spot-text { order: 0; }
+}
+
+/* ============================================================================================ theme compare */
+.compare { position: relative; overflow: hidden; border-radius: var(--radius-l); border: 1px solid var(--stroke-strong); box-shadow: var(--shadow-l); user-select: none; touch-action: pan-y; }
+.compare img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
+.compare .over { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--pos, 50%)); }
+.compare .bar { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 2px; background: #fff; box-shadow: 0 0 12px rgba(0, 0, 0, .5); transform: translateX(-1px); }
+.compare .knob {
+  position: absolute; top: 50%; left: var(--pos, 50%); transform: translate(-50%, -50%);
+  width: 46px; height: 46px; border-radius: 50%; cursor: ew-resize;
+  background: rgba(255, 255, 255, .92); color: #111; display: grid; place-items: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .35); border: 0;
+}
+.compare .tag { position: absolute; top: 16px; padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  background: rgba(0, 0, 0, .55); color: #fff; backdrop-filter: blur(10px); }
+.compare .tag.l { left: 16px; } .compare .tag.r { right: 16px; }
+
+/* ============================================================================================ gallery */
+.gallery { columns: 3 320px; column-gap: 14px; }
+.gallery figure {
+  break-inside: avoid; margin: 0 0 14px; overflow: hidden;
+  border-radius: var(--radius); border: 1px solid var(--stroke);
+  background: var(--card); cursor: zoom-in;
+  transition: transform .3s var(--ease), box-shadow .3s, border-color .3s;
+}
+.gallery figure:hover { transform: translateY(-3px); box-shadow: var(--shadow-l); border-color: var(--stroke-strong); }
+.gallery img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; }
+.gallery figcaption { padding: 10px 14px; font-size: 14px; color: var(--text-2); display: flex; justify-content: space-between; gap: 8px; }
+.gallery figcaption b { color: var(--text); font-weight: 600; }
+
+/* ============================================================================================ lightbox (ContentDialog-like) */
+.lightbox {
+  position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px;
+  background: rgba(0, 0, 0, .55); backdrop-filter: blur(6px);
+  opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox .dlg {
+  width: min(1400px, 100%); max-height: calc(100vh - 48px); display: flex; flex-direction: column;
+  background: var(--card-solid); border: 1px solid var(--stroke-strong); border-radius: var(--radius-l);
+  box-shadow: var(--shadow-l); overflow: hidden;
+  transform: scale(.96); transition: transform .3s var(--ease);
+}
+.lightbox.open .dlg { transform: none; }
+.lightbox .dlg header { display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 16px; border-bottom: 1px solid var(--divider); }
+.lightbox .dlg header b { font-size: 15px; }
+.lightbox .dlg header span { color: var(--text-3); font-size: 13px; }
+.lightbox .dlg header .sp { margin-inline-start: auto; display: flex; gap: 4px; }
+.lightbox .dlg .body { overflow: auto; background: #111; display: grid; place-items: center; }
+.lightbox .dlg .body img { max-height: calc(100vh - 120px); width: auto; }
+
+/* ============================================================================================ steps */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; counter-reset: s; }
+.step { padding: 26px; position: relative; }
+.step::before {
+  counter-increment: s; content: counter(s);
+  position: absolute; top: 18px; inset-inline-end: 22px;
+  font: 700 54px/1 var(--font-display); color: var(--accent); opacity: .14;
+}
+.step .ic { color: var(--accent); margin-bottom: 14px; }
+.step h3 { font-size: 18px; margin-bottom: 8px; }
+.step p { color: var(--text-2); font-size: 14.5px; }
+@media (max-width: 980px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+/* topology */
+.topology { margin-top: 28px; padding: 30px; display: grid; grid-template-columns: 1fr auto 1.4fr; gap: 26px; align-items: center; }
+.node { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: var(--radius); background: var(--card-secondary); border: 1px solid var(--stroke); }
+.node .bubble { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); flex: none; }
+.node b { display: block; }
+.node span { color: var(--text-2); font-size: 13.5px; }
+.nodes { display: grid; gap: 10px; }
+.link { color: var(--text-3); display: grid; justify-items: center; gap: 6px; font-size: 12.5px; }
+.link .line { width: 90px; height: 2px; background: repeating-linear-gradient(90deg, var(--accent) 0 8px, transparent 8px 14px); animation: dash 1s linear infinite; }
+@keyframes dash { to { background-position: 14px 0; } }
+@media (max-width: 900px) { .topology { grid-template-columns: 1fr; } .link .line { width: 2px; height: 40px; background: repeating-linear-gradient(0deg, var(--accent) 0 8px, transparent 8px 14px); } }
+
+/* ============================================================================================ requirements */
+.req { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.req-table { padding: 6px; overflow: hidden; }
+.req-table table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.req-table th, .req-table td { padding: 14px 16px; text-align: start; border-bottom: 1px solid var(--divider); }
+.req-table tr:last-child td { border-bottom: 0; }
+.req-table th { color: var(--text-3); font-weight: 500; font-size: 13.5px; }
+.req-table td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+.req-table td { color: var(--text-2); }
+.req-table td.best { color: var(--accent); }
+.req-side { padding: 26px; display: grid; gap: 18px; align-content: start; }
+.req-side .row { display: flex; gap: 14px; }
+.req-side .row .ic { color: var(--accent); margin-top: 3px; }
+.req-side b { display: block; }
+.req-side span { color: var(--text-2); font-size: 14.5px; }
+@media (max-width: 900px) { .req { grid-template-columns: 1fr; } .req-table { overflow-x: auto; } }
+
+/* ============================================================================================ download */
+.download {
+  position: relative; overflow: hidden;
+  padding: 52px; border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, #003b7a 0%, #005fb8 45%, #2b88d8 75%, #6b6ff0 100%);
+  color: #fff; box-shadow: var(--shadow-l);
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center;
+}
+.download::before {
+  content: ""; position: absolute; width: 520px; height: 520px; border-radius: 50%;
+  inset-inline-end: -160px; top: -200px; background: radial-gradient(closest-side, rgba(255, 255, 255, .25), transparent);
+}
+.download h2 { font-size: clamp(28px, 4vw, 42px); margin-bottom: 14px; color: #fff; }
+.download p { color: rgba(255, 255, 255, .85); font-size: 17px; }
+.download .btn.accent { background: #fff; color: #003e92; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .5); }
+.download .btn.accent:hover { background: #f0f6ff; }
+.download .btn.ghost { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .3); color: #fff; }
+.download .btn.ghost:hover { background: rgba(255, 255, 255, .2); }
+.download .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.dl-card {
+  position: relative; padding: 24px; border-radius: var(--radius-l);
+  background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .22);
+  backdrop-filter: blur(20px);
+}
+.dl-card .file { display: flex; gap: 14px; align-items: center; margin-bottom: 18px; }
+.dl-card .file img { width: 52px; height: 52px; border-radius: 12px; }
+.dl-card .file b { display: block; font-size: 17px; }
+.dl-card .file span { color: rgba(255, 255, 255, .75); font-size: 13.5px; }
+.dl-card dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 0; font-size: 14px; }
+.dl-card dt { color: rgba(255, 255, 255, .7); }
+.dl-card dd { margin: 0; }
+.dl-card code { font-family: Consolas, monospace; font-size: 11.5px; word-break: break-all; color: rgba(255, 255, 255, .85); direction: ltr; display: block; text-align: start; }
+@media (max-width: 900px) { .download { grid-template-columns: 1fr; padding: 32px 24px; } }
+
+/* ============================================================================================ FAQ (Expander) */
+.faq { display: grid; gap: 8px; max-width: 900px; margin: 0 auto; }
+.faq details { border-radius: var(--radius); overflow: hidden; }
+.faq summary {
+  list-style: none; cursor: pointer; padding: 18px 22px; display: flex; align-items: center; gap: 14px;
+  font-weight: 600; font-size: 16px; transition: background .15s;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { background: var(--card-hover); }
+.faq summary .ic { color: var(--accent); }
+.faq summary .chev { margin-inline-start: auto; color: var(--text-2); transition: transform .25s var(--ease); width: 16px; height: 16px; }
+.faq details[open] summary .chev { transform: rotate(180deg); }
+.faq details > div { padding: 0 22px 20px 22px; padding-inline-start: 56px; color: var(--text-2); font-size: 15.5px; border-top: 1px solid transparent; }
+.faq details[open] > div { animation: rise .35s var(--ease); }
+
+/* ============================================================================================ contact + footer */
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.contact .card { padding: 30px; }
+.dev { display: flex; gap: 18px; align-items: center; }
+.avatar { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; font: 700 24px var(--font-display);
+  color: #fff; background: linear-gradient(135deg, #005fb8, #4cc2ff); box-shadow: 0 8px 24px -8px #005fb8; flex: none; }
+.dev b { font-size: 20px; display: block; }
+.dev span { color: var(--text-2); }
+.contact-list { display: grid; gap: 10px; margin-top: 22px; }
+.contact-list a {
+  display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: var(--radius);
+  background: var(--card-secondary); border: 1px solid var(--stroke); color: var(--text) !important;
+  transition: background .15s, border-color .15s;
+}
+.contact-list a:hover { background: var(--card-hover); border-color: var(--stroke-strong); }
+.contact-list a span { color: var(--text-2); font-size: 14px; margin-inline-start: auto; direction: ltr; }
+.contact-list .ic { color: var(--accent); }
+.wa { color: #25d366 !important; }
+@media (max-width: 900px) { .contact { grid-template-columns: 1fr; } }
+
+footer { padding: 34px 0 44px; border-top: 1px solid var(--divider); margin-top: 60px; color: var(--text-3); font-size: 14px; }
+footer .inner { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+footer .links { display: flex; gap: 18px; margin-inline-start: auto; flex-wrap: wrap; }
+footer .links a { color: var(--text-2) !important; }
+
+/* floating WhatsApp */
+.fab {
+  position: fixed; bottom: 22px; inset-inline-start: 22px; z-index: 40;
+  width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center;
+  background: #25d366; color: #fff; box-shadow: 0 10px 30px -8px rgba(37, 211, 102, .8);
+  transition: transform .25s var(--ease);
+}
+.fab:hover { transform: scale(1.08); }
+
+/* ============================================================================================ tech strip */
+.tech { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.tech-item { padding: 18px; text-align: center; display: grid; gap: 4px; }
+.tech-item b { font-family: var(--font-display); font-size: 17px; }
+.tech-item span { color: var(--text-2); font-size: 13px; line-height: 1.6; }
+@media (max-width: 980px) { .tech { grid-template-columns: repeat(2, 1fr); } }
+
+/* ============================================================================================ back to top */
+.to-top {
+  position: fixed; bottom: 22px; inset-inline-end: 22px; z-index: 40;
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--acrylic); color: var(--text) !important;
+  border: 1px solid var(--stroke-strong); box-shadow: var(--shadow-l);
+  backdrop-filter: blur(30px) saturate(150%); -webkit-backdrop-filter: blur(30px) saturate(150%);
+  opacity: 0; transform: translateY(16px) scale(.9); pointer-events: none;
+  transition: opacity .25s, transform .3s var(--ease), background .15s;
+}
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.to-top:hover { background: var(--card-hover); }
+
+/* ============================================================================================ phones */
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  section { padding: 64px 0; }
+  .container { width: calc(100% - 32px); }
+  .nav .inner { gap: 10px; }
+  .brand small { display: none; }
+  .hero { padding: 100px 0 24px; }
+  .hero .lead { font-size: 16px; }
+  .hero .ctas .btn { width: 100%; }
+  .hero .meta { gap: 10px 16px; font-size: 13px; }
+  .window { margin-top: 36px; border-radius: 10px; }
+  .window .titlebar { height: 28px; font-size: 11px; }
+  .window .caps i { width: 30px; }
+  .section-head { margin-bottom: 32px; }
+  .section-head p { font-size: 16px; }
+  .fact { padding: 16px; }
+  .tour .explain, .module, .step, .req-side, .contact .card { padding: 20px; }
+  .tour .explain h3 { font-size: 22px; }
+  .spot { padding: 20px 0; }
+  .spot-text > p { font-size: 16px; }
+  .gallery { columns: 1; }
+  .download { padding: 26px 18px; border-radius: 16px; }
+  .download .ctas .btn { width: 100%; }
+  .dl-card dl { grid-template-columns: 1fr; gap: 2px; }
+  .dl-card dd { margin-bottom: 8px; }
+  .faq summary { padding: 16px; font-size: 15px; }
+  .faq details > div { padding: 0 16px 16px; }
+  .req-table th, .req-table td { padding: 12px 10px; font-size: 14px; }
+  .topology { padding: 18px; }
+  .contact-list a span { font-size: 12.5px; }
+  .compare .knob { width: 40px; height: 40px; }
+  .tech { grid-template-columns: 1fr 1fr; }
+  footer .inner { flex-direction: column; text-align: center; }
+  footer .links { margin-inline-start: 0; justify-content: center; }
+  .fab { width: 50px; height: 50px; bottom: 16px; inset-inline-start: 16px; }
+  .to-top { width: 44px; height: 44px; bottom: 19px; inset-inline-end: 16px; }
+  .lightbox { padding: 8px; }
+}
+
+/* ============================================================================================ reveal on scroll */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
+  .nav-links .lang-link { display: none; }
+</style>
+</head>
+
+<body>
+
+<!-- ================================================================================================ NAV -->
+<header class="nav" id="nav">
+  <div class="container inner">
+    <a class="brand" href="#home" aria-label="TQ Store">
+      <img src="images/logo.png" alt="" width="34" height="34">
+      <span>TQ Store<small>نظام نقاط البيع وإدارة المتاجر</small></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="أقسام الموقع">
+      <a href="#tour">جولة في البرنامج</a>
+      <a href="#modules">الوحدات</a>
+      <a href="#highlights">ما يميّزه</a>
+      <a href="#gallery">الشاشات</a>
+      <a href="#setup">التشغيل</a>
+      <a href="#requirements">المتطلبات</a>
+      <a href="#faq">الأسئلة الشائعة</a>
+      <a href="#contact">تواصل معنا</a>
+      <a href="en/" hreflang="en" lang="en" class="lang-link">English</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn subtle hide-sm" href="en/" hreflang="en" lang="en" title="English version"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i>English</a>
+      <button class="btn subtle icon" id="themeBtn" aria-label="تبديل الوضع الفاتح / الداكن" title="الوضع الفاتح / الداكن">
+        <i class="ic" id="themeIcon"></i>
+      </button>
+      <a class="btn accent hide-sm" href="#download"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>تحميل البرنامج</a>
+      <button class="btn subtle icon menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">
+        <i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/navigation_24_regular.svg)"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+
+<!-- ================================================================================================ HERO -->
+<section class="hero">
+  <div class="container">
+    <a class="chip reveal" href="#new" style="text-decoration:none;color:inherit"><span class="dot"></span>الإصدار 1.1 متاح الآن — عربي وإنجليزي، والبيع مستمر حتى لو توقف الخادم</a>
+    <h1 class="reveal">إدارة متجرك بالكامل،<br><span class="grad">بسرعة الكاشير ودقة المحاسب</span></h1>
+    <p class="lead reveal">
+      TQ Store نظام متكامل للسوبر ماركت والمحلات التجارية: بيع بالباركود واللمس، مخزون حيّ، خزائن وبنوك ومحافظ إلكترونية،
+      ورديات بدرج كاش لكل كاشير، تقارير وأرباح لحظية، وصلاحيات دقيقة لكل شاشة — في واجهة هادئة وسريعة تريح الكاشير طوال اليوم.
+    </p>
+    <div class="ctas reveal">
+      <a class="btn accent lg" href="#download"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>حمّل النسخة التجريبية</a>
+      <a class="btn lg" href="#tour"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/window_24_regular.svg)"></i>شاهد البرنامج من الداخل</a>
+    </div>
+    <div class="meta reveal">
+      <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>يعمل بدون إنترنت</span>
+      <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>عدة أجهزة كاشير على شبكة واحدة</span>
+      <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>عربي وإنجليزي</span>
+      <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>تحديثات تلقائية</span>
+    </div>
+
+    <div class="window reveal" id="heroWindow">
+      <div class="titlebar"><img src="images/logo.png" alt="">TQ Store — سوبر ماركت النور<div class="caps"><i class="min"></i><i class="max"></i><i class="cls"></i></div></div>
+      <img class="shot themed" data-dark="images/dashboard-dark.jpg" data-light="images/dashboard-light.jpg" src="images/dashboard-dark.jpg"
+           alt="الشاشة الرئيسية في TQ Store: مؤشرات الأداء والوصول السريع" width="1920" height="1080" fetchpriority="high">
+      <div class="float-card f1"><span class="bubble"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/data_bar_vertical_24_regular.svg)"></i></span><span><b>أرباح لحظية</b>صافي الربح يتحدّث مع كل فاتورة</span></div>
+      <div class="float-card f2"><span class="bubble"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/barcode_scanner_24_regular.svg)"></i></span><span><b>بيع في ثوانٍ</b>باركود · لمس · ميزان</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ FACTS -->
+<div class="facts">
+  <div class="container grid">
+    <div class="card fact reveal"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/apps_24_regular.svg)"></i><div><b>+60 شاشة</b><span>تغطي كل أقسام المتجر</span></div></div>
+    <div class="card fact reveal"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/database_24_regular.svg)"></i><div><b>100,000+ فاتورة</b><span>بدون أي بطء في التقارير</span></div></div>
+    <div class="card fact reveal"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/shield_lock_24_regular.svg)"></i><div><b>صلاحية لكل شاشة</b><span>عرض · إضافة · تعديل · حذف · طباعة</span></div></div>
+    <div class="card fact reveal"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/print_24_regular.svg)"></i><div><b>80مم و A4</b><span>طباعة حرارية وتقارير PDF</span></div></div>
+  </div>
+</div>
+
+<!-- ================================================================================================ TOUR -->
+<section id="tour">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/window_24_regular.svg)"></i>جولة داخل البرنامج</span>
+      <h2>كل ما يحتاجه متجرك… في نافذة واحدة</h2>
+      <p>اختر قسمًا لترى الشاشة الحقيقية من البرنامج وما تستطيع فعله بها. اضغط على أي صورة لتكبيرها.</p>
+    </div>
+
+    <div class="selector reveal" role="tablist" aria-label="أقسام الجولة">
+      <button role="tab" aria-selected="true" data-tab="t-sales"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/cart_24_regular.svg)"></i>فاتورة البيع</button>
+      <button role="tab" aria-selected="false" data-tab="t-pos"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/phone_desktop_24_regular.svg)"></i>نقطة البيع اللمسية</button>
+      <button role="tab" aria-selected="false" data-tab="t-items"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/tag_24_regular.svg)"></i>الأصناف</button>
+      <button role="tab" aria-selected="false" data-tab="t-stock"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/box_24_regular.svg)"></i>المخزون</button>
+      <button role="tab" aria-selected="false" data-tab="t-money"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/building_bank_24_regular.svg)"></i>الخزينة</button>
+      <button role="tab" aria-selected="false" data-tab="t-reports"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/data_bar_vertical_24_regular.svg)"></i>التقارير</button>
+    </div>
+
+    <div class="tour">
+      <!-- sales -->
+      <div class="tour-panel on" id="t-sales" role="tabpanel">
+        <div class="card preview">
+          <div class="window" style="margin:0;box-shadow:none;border:0"><div class="titlebar"><img src="images/logo.png" alt="">فاتورة بيع<div class="caps"><i class="min"></i><i class="max"></i><i class="cls"></i></div></div>
+          <img class="themed zoom" data-dark="images/sales-dark.jpg" data-light="images/sales-light.jpg" src="images/sales-dark.jpg" alt="شاشة فاتورة البيع" loading="lazy" width="1920" height="1080"></div>
+        </div>
+        <div class="card explain">
+          <h3>فاتورة بيع سريعة كالبرق</h3>
+          <p>امسح الباركود واضغط Enter — الصنف يُضاف فورًا بسعره ووحدته، والإجمالي والربح المتوقع يتحدّثان أمامك.</p>
+          <ul class="checks">
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>باركود الميزان</b> يقرأ الوزن والسعر من الملصق مباشرة.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>دفع متعدد</b>: كاش، بنك، محافظ إلكترونية أو آجل على العميل — في فاتورة واحدة.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>تعليق واسترجاع</b> الفواتير، و<b>تجهيز</b> طلبات التوصيل مع مناطق ورسوم ومناديب.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>خصم على الصنف أو الفاتورة، <b>عروض تلقائية</b>، وتبديل جملة/تجزئة حسب صلاحية الكاشير.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>اختصارات كاملة من لوحة المفاتيح: <b>F12</b> دفع وطباعة، <b>F2</b> فاتورة جديدة، <b>F10</b> تعليق.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- pos -->
+      <div class="tour-panel" id="t-pos" role="tabpanel">
+        <div class="card preview">
+          <div class="window" style="margin:0;box-shadow:none;border:0"><div class="titlebar"><img src="images/logo.png" alt="">نقطة بيع<div class="caps"><i class="min"></i><i class="max"></i><i class="cls"></i></div></div>
+          <img class="themed zoom" data-dark="images/pos-dark.jpg" data-light="images/pos-light.jpg" src="images/pos-dark.jpg" alt="شاشة نقطة البيع اللمسية" loading="lazy" width="1920" height="1080"></div>
+        </div>
+        <div class="card explain">
+          <h3>نقطة بيع لشاشات اللمس</h3>
+          <p>أقسام ملوّنة ومربعات أصناف كبيرة — الكاشير يبيع بلمسة بدون كيبورد ولا ماوس.</p>
+          <ul class="checks">
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>لون وترتيب لكل قسم، والأصناف تأخذ لون قسمها أو لونها الخاص.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>تنسيق كامل</b> لحجم المربعات والخطوط وما يظهر عليها (السعر، الكمية) مع معاينة فورية.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>لوحة مفاتيح وأرقام لمسية</b> تظهر تلقائيًا في خانات الكتابة.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>إضافة سريعة</b> للأصناف المفضّلة، و<b>شاشة عميل</b> على شاشة ثانية تعرض الفاتورة لحظيًا.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- items -->
+      <div class="tour-panel" id="t-items" role="tabpanel">
+        <div class="card preview">
+          <div class="window" style="margin:0;box-shadow:none;border:0"><div class="titlebar"><img src="images/logo.png" alt="">إدارة الأصناف<div class="caps"><i class="min"></i><i class="max"></i><i class="cls"></i></div></div>
+          <img class="themed zoom" data-dark="images/items-dark.jpg" data-light="images/items-light.jpg" src="images/items-dark.jpg" alt="شاشة إدارة الأصناف" loading="lazy" width="1920" height="1080"></div>
+        </div>
+        <div class="card explain">
+          <h3>تكويد الأصناف بلا حدود</h3>
+          <p>آلاف الأصناف تظهر فورًا، مع بحث بالاسم أو الكود أو الباركود، وتعديل من نفس الشاشة.</p>
+          <ul class="checks">
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>وحدات متعددة</b> (قطعة، علبة، كرتونة) لكل منها سعر وباركود ومعامل تحويل.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>ألوان ونكهات</b> لكل منها باركود ورصيد مستقل.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>أقسام رئيسية وفرعية، تتبّع الصلاحية، أصناف خدمية بدون مخزون، وكود وباركود تلقائي.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>استيراد من إكسيل</b> وتعديل سريع للأسعار بالجملة.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- stock -->
+      <div class="tour-panel" id="t-stock" role="tabpanel">
+        <div class="card preview">
+          <div class="window" style="margin:0;box-shadow:none;border:0"><div class="titlebar"><img src="images/logo.png" alt="">نظرة عامة على المخزون<div class="caps"><i class="min"></i><i class="max"></i><i class="cls"></i></div></div>
+          <img class="zoom" src="images/stock-dark.jpg" alt="نظرة عامة على المخزون" loading="lazy" width="1920" height="1080"></div>
+        </div>
+        <div class="card explain">
+          <h3>مخزون حيّ تعرف قيمته في أي لحظة</h3>
+          <p>رصيد كل صنف في كل مخزن، بتكلفته وسعر بيعه وقيمته الإجمالية، وأرباحك المتوقعة.</p>
+          <ul class="checks">
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>متوسط تكلفة مرجّح</b> يُحسب تلقائيًا مع كل فاتورة شراء.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>جرد بالباركود</b> مع فرق الكمية وقيمته لحظيًا، وتسويات وتالف بأسبابها.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>تحويل بين المخازن، كارت الصنف، وتنبيهات النواقص والصلاحية والمطلوب شراؤه.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- money -->
+      <div class="tour-panel" id="t-money" role="tabpanel">
+        <div class="card preview">
+          <div class="window" style="margin:0;box-shadow:none;border:0"><div class="titlebar"><img src="images/logo.png" alt="">الخزينة — الأرصدة الحالية<div class="caps"><i class="min"></i><i class="max"></i><i class="cls"></i></div></div>
+          <img class="themed zoom" data-dark="images/treasury-dark.jpg" data-light="images/treasury-light.jpg" src="images/treasury-dark.jpg" alt="الخزينة والأرصدة" loading="lazy" width="1920" height="1080"></div>
+        </div>
+        <div class="card explain">
+          <h3>كل جنيه في مكانه</h3>
+          <p>خزائن، بنوك، ومحافظ إلكترونية (فودافون كاش، إنستاباي…) بأرصدة لحظية وكشف حركة لكل حساب.</p>
+          <ul class="checks">
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>درج كاش لكل وردية</b> باسم الكاشير، يُسلَّم تلقائيًا للخزينة عند الإغلاق.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>سندات قبض وصرف، تحويل بين الحسابات، مصروفات بأنواعها، ورسوم تحويل المحافظ.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>منع أو السماح بالسحب على المكشوف لكل مستخدم.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- reports -->
+      <div class="tour-panel" id="t-reports" role="tabpanel">
+        <div class="card preview">
+          <div class="window" style="margin:0;box-shadow:none;border:0"><div class="titlebar"><img src="images/logo.png" alt="">الرئيسية — الأداء والرسوم البيانية<div class="caps"><i class="min"></i><i class="max"></i><i class="cls"></i></div></div>
+          <img class="zoom themed" data-dark="images/charts-dark.jpg" data-light="images/charts-light.jpg" src="images/charts-dark.jpg" alt="الرسوم البيانية في الشاشة الرئيسية" loading="lazy" width="1920" height="1080"></div>
+        </div>
+        <div class="card explain">
+          <h3>قرارات مبنية على أرقام</h3>
+          <p>إحصائيات اليوم والأسبوع والشهر، أعلى الأصناف مبيعًا، المبيعات حسب الكاشير، والأرباح والخسائر.</p>
+          <ul class="checks">
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>أكثر من <b>30 تقريرًا</b>: مبيعات، مشتريات، مرتجعات، مخزون، راكد، تالف، ورديات، ضريبة، كشوف حسابات.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>كل تقرير: بحث، <b>فلاتر أعمدة</b>، ترتيب، إجماليات، تصدير إكسيل، وطباعة A4 أو PDF.</span></li>
+            <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>تنبيهات المدير على <b>واتساب</b> عند فتح وإغلاق الورديات وتعديل الفواتير.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ MODULES -->
+<section id="new" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/sparkle_24_regular.svg)"></i>الجديد في الإصدار 1.1</span>
+      <h2>أهم الإضافات في هذا الإصدار</h2>
+      <p>كل إضافة هنا جاءت من طلب حقيقي من أصحاب المحلات — ومتاحة مجانًا لكل من لديه تحديثات.</p>
+    </div>
+    <div class="modules">
+      <article class="card module reveal" style="--c:#0078d4;--c2:#4cc2ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i></span><h3>واجهة إنجليزية كاملة بجانب العربي</h3></div>
+        <p>كل الشاشات والرسائل والتقارير بالإنجليزي من اليسار لليمين، وتغيير اللغة من الإعدادات أو من شاشة الدخول بضغطة.</p>
+        <ul><li>عربي / English</li><li>بدون فقد بيانات</li><li>أسماء افتراضية بلغتك</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#107c10;--c2:#6ccb5f">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/plug_disconnected_24_regular.svg)"></i></span><h3>البيع مستمر حتى لو توقف الخادم</h3></div>
+        <p>لو انقطع الاتصال بجهاز الخادم يكمل الكاشير البيع من نسخة الأصناف على جهازه، وتُرحَّل الفواتير تلقائيًا عند رجوع الاتصال — بدون تكرار.</p>
+        <ul><li>دخول بدون اتصال</li><li>ترحيل تلقائي</li><li>مراجعة المدير</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#8764b8;--c2:#b4a0ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/print_24_regular.svg)"></i></span><h3>لغة الفاتورة كما تريد</h3></div>
+        <p>فاتورة البيع وتقرير إغلاق الوردية يُطبعان بالعربي أو الإنجليزي حسب الإعداد، مع زر لتغيير لغة أي فاتورة من شاشة المعاينة.</p>
+        <ul><li>80مم و A4</li><li>عربي / English</li><li>معاينة فورية</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#ca5010;--c2:#ffaa44">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/scales_24_regular.svg)"></i></span><h3>الوزن والميزان الإلكتروني</h3></div>
+        <p>ميزان طاولة متصل بالجهاز يقرأ الوزن مباشرة، وأوزان جاهزة بلمسة (ربع، نص، كيلو…) أو الوزن حسب المبلغ، بجانب باركود الميزان.</p>
+        <ul><li>ميزان COM / USB</li><li>أوزان جاهزة</li><li>باركود الميزان</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#c239b3;--c2:#ff8ad8">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/flash_24_regular.svg)"></i></span><h3>تجهيز أسرع للمحل</h3></div>
+        <p>معالج أول تشغيل يجهّز بيانات النشاط والعملة والطباعة، وشاشة «إضافة سريعة للأصناف» لإدخال مئات الأصناف بالباركود بسرعة.</p>
+        <ul><li>معالج التشغيل</li><li>إضافة سريعة</li><li>استيراد إكسيل</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#0063b1;--c2:#62b7ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_sync_24_regular.svg)"></i></span><h3>تحديثات تلقائية مع الترخيص</h3></div>
+        <p>ترخيصك يحدد مكان التحديثات: البرنامج ينزّل الإصدار الجديد في الخلفية ويثبّته عند الإغلاق — والمثبّت يفحص الويندوز ويوضح المطلوب لو غير مناسب.</p>
+        <ul><li>تنزيل في الخلفية</li><li>موقّعة رقميًا</li><li>فحص الويندوز</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="modules" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/apps_24_regular.svg)"></i>الوحدات</span>
+      <h2>نظام واحد بدلًا من عشرة برامج</h2>
+      <p>كل وحدة مترابطة مع الباقي: البيع يخصم من المخزون، ويسجّل في الخزينة، ويظهر في الوردية والتقارير — تلقائيًا.</p>
+    </div>
+
+    <div class="modules">
+      <article class="card module reveal" style="--c:#0078d4;--c2:#4cc2ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/cart_24_regular.svg)"></i></span><h3>المبيعات ونقاط البيع</h3></div>
+        <p>فاتورة بيع بالباركود، نقطة بيع لمسية، مرتجعات كاملة أو جزئية، فواتير معلّقة وتعديل الفواتير المرحّلة بأمان.</p>
+        <ul><li>دفع متعدد</li><li>آجل</li><li>توصيل</li><li>شاشة عميل</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#8764b8;--c2:#b4a0ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/receipt_24_regular.svg)"></i></span><h3>المشتريات والموردين</h3></div>
+        <p>فواتير شراء ومرتجعات، أرصدة الموردين وكشوف حساباتهم، سداد آجل ومدفوعات مجدولة بتنبيهات.</p>
+        <ul><li>إضافة مورد سريعة</li><li>حفظ تلقائي</li><li>كشف حساب</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#ca5010;--c2:#ffaa44">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/box_24_regular.svg)"></i></span><h3>المخزون والمخازن</h3></div>
+        <p>مخازن متعددة، تحويلات، تسويات، تالف، جرد بالباركود، تتبّع الصلاحية ومتوسط التكلفة المرجّح.</p>
+        <ul><li>تنبيهات النواقص</li><li>قريبة الانتهاء</li><li>كارت الصنف</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#038387;--c2:#00b7c3">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/tag_24_regular.svg)"></i></span><h3>الأصناف والباركود</h3></div>
+        <p>أقسام رئيسية وفرعية، وحدات قياس، ألوان ونكهات، ومصمم ملصقات باركود بالسحب والإفلات.</p>
+        <ul><li>باركود الميزان</li><li>استيراد إكسيل</li><li>طباعة ملصقات</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#107c10;--c2:#6ccb5f">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/building_bank_24_regular.svg)"></i></span><h3>الخزينة والبنوك والمحافظ</h3></div>
+        <p>أرصدة لحظية، سندات قبض وصرف، تحويل بين الحسابات، مصروفات، وكشف حركة شامل لكل حساب.</p>
+        <ul><li>محافظ إلكترونية</li><li>رسوم تحويل</li><li>أرباح وخسائر</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#c239b3;--c2:#f17ce4">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/clock_24_regular.svg)"></i></span><h3>الورديات</h3></div>
+        <p>فتح وإغلاق بكلمة سر الكاشير، درج كاش مؤقت لكل وردية، عجز وزيادة، وإيصال إغلاق تفصيلي بالوارد والصادر.</p>
+        <ul><li>استكمال وردية</li><li>حساب المناديب</li><li>فواتير الوردية</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#e3008c;--c2:#ff6fb5">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/people_24_regular.svg)"></i></span><h3>العملاء والتقسيط</h3></div>
+        <p>أرصدة العملاء وحدود الائتمان، التحصيل، التقسيط بخطط وأقساط مستحقة، وكشوف حساب مفصّلة.</p>
+        <ul><li>تقسيط</li><li>حدود ائتمان</li><li>كشف حساب</li><li>واتساب</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#d13438;--c2:#ff8a80">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/gift_24_regular.svg)"></i></span><h3>العروض والخصومات</h3></div>
+        <p>خصم على صنف أو قسم، اشترِ X واحصل على Y، وخصم عند تجاوز قيمة الفاتورة — تُطبَّق تلقائيًا في البيع.</p>
+        <ul><li>فترة زمنية</li><li>تلقائي</li><li>تقرير العروض</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#4f6bed;--c2:#93a4ff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/building_factory_24_regular.svg)"></i></span><h3>التصنيع والإنتاج</h3></div>
+        <p>وصفات وقوائم تصنيع، أوامر إنتاج تخصم الخامات وتضيف المنتج النهائي بتكلفته الحقيقية.</p>
+        <ul><li>وصفات (ريسبي)</li><li>قوالب إنتاج</li><li>تكلفة فعلية</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#5c2e91;--c2:#9b6bd6">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/people_team_24_regular.svg)"></i></span><h3>الموارد البشرية</h3></div>
+        <p>الموظفون، الرواتب، السلف، الجزاءات والمكافآت، والحضور والانصراف بباركود الموظف.</p>
+        <ul><li>حضور بالباركود</li><li>صرف رواتب</li><li>سلف</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#486860;--c2:#7fa59a">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/shield_lock_24_regular.svg)"></i></span><h3>المستخدمون والصلاحيات</h3></div>
+        <p>صلاحية لكل شاشة، حدود خصم لكل كاشير، تجاوز بكلمة مرور المدير، ونسخ الصلاحيات بين المستخدمين.</p>
+        <ul><li>سجل الحركات</li><li>تجاوز بكلمة مرور</li><li>قوالب</li></ul>
+      </article>
+      <article class="card module reveal" style="--c:#0063b1;--c2:#2d9fff">
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/cloud_sync_24_regular.svg)"></i></span><h3>الأمان والنسخ والمزامنة</h3></div>
+        <p>نسخ احتياطي تلقائي عند الخروج واستعادة بضغطة، ومزامنة سحابية لنسخة أونلاين من بياناتك.</p>
+        <ul><li>نسخ تلقائي</li><li>مزامنة سحابية</li><li>تحديثات موقّعة</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ HIGHLIGHTS -->
+<section id="highlights" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/sparkle_24_regular.svg)"></i>ما يميّز TQ Store</span>
+      <h2>تفاصيل صُنعت من واقع المحلات</h2>
+      <p>كل ميزة هنا جاءت من طلب حقيقي لصاحب محل أو كاشير — لذلك تحل مشاكل يومية فعلًا.</p>
+    </div>
+
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/data_bar_vertical_24_regular.svg)"></i>لوحة الأداء</span>
+        <h3>محلك كله في نظرة واحدة</h3>
+        <p>أول ما تفتح البرنامج تشوف مبيعاتك اليومية في رسم بياني، والمبيعات مقابل التكاليف وصافي الربح، وإمتى شغلك بيزيد: أكثر يوم مبيعًا، أكثر ساعة ازدحامًا، وأعلى قسم دخلًا.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>المبيعات حسب <b>ساعات اليوم</b> و<b>أيام الأسبوع</b> لتنظيم العمالة والورديات.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>توزيع المبيعات على الأقسام</b> والأصناف الأكثر مبيعًا وأرصدة الحسابات.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>اختر الفترة (اليوم، الأسبوع، الشهر، السنة) والأرقام تتحدّث فورًا.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom themed" data-dark="images/charts-dark.jpg" data-light="images/charts-light.jpg" src="images/charts-dark.jpg" alt="لوحة الأداء والرسوم البيانية" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/clock_24_regular.svg)"></i>الورديات</span>
+        <h3>درج كاش لكل وردية… ولا مكان للعجز المجهول</h3>
+        <p>عند فتح الوردية يُنشأ درج مؤقت باسم الكاشير ورقم الوردية. كل نقدية الوردية تدخله، وعند الإغلاق يعدّ الكاشير الدرج فيظهر العجز أو الزيادة فورًا، ثم تُسلَّم النقدية كلها تلقائيًا إلى خزينة الاستلام.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>إيصال إغلاق تفصيلي: <b>الوارد، الصادر، الحسابات، وتسوية النقدية</b>.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>الإغلاق بكلمة سر من فتح الوردية، وإخفاء الأرقام عن الكاشير إن أردت.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>لا تُغلق الوردية قبل محاسبة مناديب التوصيل.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/shift-close-dark.jpg" alt="شاشة إغلاق الوردية" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/filter_24_regular.svg)"></i>الجداول الذكية</span>
+        <h3>فلتر على أي عمود، كما في أقوى برامج المحاسبة</h3>
+        <p>في كل جدول بالبرنامج: اضغط أيقونة الفلتر بجانب اسم العمود لتصفية النصوص والأرقام والتواريخ بشروط ذكية وقائمة القيم — والنتيجة تظهر وأنت تكتب.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>تواريخ جاهزة: <b>اليوم، أمس، الأسبوع والشهر والسنة الحالية والسابقة</b>، أو من تاريخ لتاريخ.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>الأعمدة تتّسع تلقائيًا لبياناتها، وعمود الإجراءات ثابت دائمًا.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>سريع مع عشرات الآلاف من الصفوف بدون أي تهنيج.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/grid-filter-dark.jpg" alt="فلتر الأعمدة في جدول الأصناف" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/receipt_24_regular.svg)"></i>الفاتورة المطبوعة</span>
+        <h3>صمّم فاتورتك وشاهد النتيجة فورًا</h3>
+        <p>اختر ما يظهر في الفاتورة الحرارية وحجم كل خط، أضف بيانات نشاطك ورمز QR لصفحتك أو موقعك — والمعاينة على اليسار تتغيّر مع كل تعديل.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>طباعة صامتة مباشرة على طابعة الكاشير 80مم أو 58مم.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>إرسال الفاتورة للعميل على <b>واتساب</b>.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>تقارير A4 وتصدير PDF وإكسيل من كل شاشة.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom themed" data-dark="images/receipt-layout-dark.jpg" data-light="images/receipt-layout-light.jpg" src="images/receipt-layout-dark.jpg" alt="تنسيق الفاتورة بمعاينة حية" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/barcode_scanner_24_regular.svg)"></i>ملصقات الباركود</span>
+        <h3>مصمم ملصقات احترافي مدمج</h3>
+        <p>اسحب النص والباركود والصور على الملصق بالمقاس الذي تريده، اربطه ببيانات الصنف، واطبع نسخة أو مئات الملصقات دفعة واحدة.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>باركود متجه حاد على أي طابعة ملصقات بأي دقة.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>حفظ تصميماتك، ملصقات مزدوجة، وتصدير PDF.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/label-designer-dark.jpg" alt="مصمم ملصقات الباركود" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/gift_24_regular.svg)"></i>العروض والخصومات</span>
+        <h3>عروضك تُطبَّق وحدها عند البيع</h3>
+        <p>جهّز العرض مرة واحدة بفترته الزمنية، والبرنامج يطبّقه تلقائيًا على كل فاتورة تستحقه — بدون أن يتذكره الكاشير أو يحسبه يدويًا.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>خصم على صنف أو قسم</b> بنسبة أو مبلغ أو سعر ثابت.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>اشترِ X واحصل على Y</b> مجانًا أو بخصم.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>خصم على الفاتورة</b> عند تجاوز قيمة معيّنة، وحدود كمية لكل صنف أو عميل.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom themed" data-dark="images/offers-dark.jpg" data-light="images/offers-light.jpg" src="images/offers-dark.jpg" alt="العروض والخصومات" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/shield_lock_24_regular.svg)"></i>الصلاحيات</span>
+        <h3>أنت تقرر من يرى ماذا… ومن يفعل ماذا</h3>
+        <p>لكل مستخدم صلاحيات العرض والإضافة والتعديل والحذف والطباعة على كل شاشة، وحدود للخصم والبيع بالسالب. وعندما يحتاج الكاشير استثناءً، يتجاوزه بكلمة مرور المدير — ويُسجَّل ذلك.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>تحديد عمود كامل بضغطة، ونسخ صلاحيات مستخدم إلى آخرين.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>سجل حركات كامل: من فعل ماذا ومتى.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/permissions-dark.jpg" alt="المستخدمون والصلاحيات" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+
+    <!-- theme compare -->
+    <div class="section-head reveal" style="margin-top:70px">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/weather_moon_24_regular.svg)"></i>مريح للعين</span>
+      <h2>فاتح أو داكن… مريح للعين طوال اليوم</h2>
+      <p>اختر الوضع الذي يناسب إضاءة محلك، ويمكن لكل جهاز أن يحتفظ بوضعه. اسحب الشريط لتقارن.</p>
+    </div>
+    <div class="compare reveal" id="compare" style="--pos:50%">
+      <img src="images/dashboard-light.jpg" alt="الوضع الفاتح" loading="lazy" width="1920" height="1080">
+      <div class="over"><img src="images/dashboard-dark.jpg" alt="الوضع الداكن" loading="lazy" width="1920" height="1080"></div>
+      <div class="bar"></div>
+      <span class="tag l">فاتح</span><span class="tag r">داكن</span>
+      <button class="knob" id="knob" aria-label="اسحب للمقارنة بين الوضعين"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_swap_24_regular.svg)"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/desktop_24_regular.svg)"></i>معرض الشاشات</span>
+      <h2>شاشات حقيقية من البرنامج</h2>
+      <p>بدون تجميل أو تصميمات وهمية — هذا ما ستراه بالضبط بعد التثبيت. اضغط لتكبير أي شاشة وتنقّل بالأسهم.</p>
+    </div>
+    <div class="gallery" id="gallery-grid"></div>
+  </div>
+</section>
+
+<!-- ================================================================================================ SETUP -->
+<section id="setup" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/wrench_24_regular.svg)"></i>من التحميل للبيع</span>
+      <h2>جاهز للعمل خلال دقائق</h2>
+      <p>المثبّت يجهّز كل شيء بنفسه — قاعدة البيانات، المكوّنات المطلوبة، والشبكة بين الأجهزة.</p>
+    </div>
+
+    <div class="steps">
+      <div class="card step reveal"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i><h3>حمّل المثبّت</h3><p>ملف واحد يحتوي البرنامج وكل ما يحتاجه للعمل، بدون تثبيت أي إطار عمل منفصل.</p></div>
+      <div class="card step reveal"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/server_24_regular.svg)"></i><h3>اختر نوع الجهاز</h3><p><b>جهاز الخادم</b>: البرنامج + قاعدة البيانات (تُنزَّل تلقائيًا). <b>جهاز كاشير</b>: البرنامج فقط ويتصل بالخادم.</p></div>
+      <div class="card step reveal"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/star_24_regular.svg)"></i><h3>جرّب 14 يومًا</h3><p>كل المزايا مفتوحة بالكامل خلال الفترة التجريبية — بيانات حقيقية وطباعة حقيقية.</p></div>
+      <div class="card step reveal"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/key_24_regular.svg)"></i><h3>فعّل نسختك</h3><p>من شاشة «التفعيل» أرسل كود جهازك عبر واتساب بضغطة، والصق مفتاح الترخيص — وتبقى بياناتك كما هي.</p></div>
+    </div>
+
+    <div class="card topology reveal">
+      <div class="node"><span class="bubble"><i class="ic xl" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/server_24_regular.svg)"></i></span><div><b>جهاز الخادم (المدير)</b><span>قاعدة البيانات + البرنامج، ونسخ احتياطي تلقائي</span></div></div>
+      <div class="link"><div class="line"></div>شبكة المحل</div>
+      <div class="nodes">
+        <div class="node"><span class="bubble"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/phone_desktop_24_regular.svg)"></i></span><div><b>كاشير 1 — نقطة بيع لمسية</b><span>ورديته ودرجه الخاص</span></div></div>
+        <div class="node"><span class="bubble"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/laptop_24_regular.svg)"></i></span><div><b>كاشير 2 — فاتورة بالباركود</b><span>نفس الأصناف والأسعار لحظيًا</span></div></div>
+        <div class="node"><span class="bubble"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/desktop_24_regular.svg)"></i></span><div><b>المخزن / المشتريات</b><span>استلام وجرد وتحويلات</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ REQUIREMENTS -->
+<section id="requirements" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/desktop_24_regular.svg)"></i>متطلبات التشغيل</span>
+      <h2>يعمل على أجهزة المحلات المعتادة</h2>
+      <p>لا يحتاج أجهزة خاصة — أي جهاز ويندوز حديث يكفي.</p>
+    </div>
+    <div class="req">
+      <div class="card req-table reveal">
+        <table>
+          <thead><tr><th>البند</th><th>الحد الأدنى</th><th>الموصى به</th></tr></thead>
+          <tbody>
+            <tr><td>نظام التشغيل</td><td>Windows 10 (1809) — 64 بت</td><td class="best">Windows 11</td></tr>
+            <tr><td>المعالج</td><td>ثنائي النواة 2 جيجاهرتز</td><td class="best">Core i3 / Ryzen 3 أو أحدث</td></tr>
+            <tr><td>الذاكرة</td><td>4 جيجابايت</td><td class="best">8 جيجابايت (للخادم)</td></tr>
+            <tr><td>التخزين</td><td>2 جيجابايت متاحة</td><td class="best">SSD</td></tr>
+            <tr><td>الشاشة</td><td>1366 × 768</td><td class="best">Full HD — تدعم اللمس</td></tr>
+            <tr><td>قاعدة البيانات</td><td colspan="2">SQL Server Express — <b>يثبّتها المثبّت تلقائيًا</b> على جهاز الخادم</td></tr>
+            <tr><td>مكوّنات إضافية</td><td colspan="2">.NET و WebView2 — <b>مضمّنة أو تُثبَّت تلقائيًا</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card req-side reveal">
+        <div class="row"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/print_24_regular.svg)"></i><div><b>الطابعات</b><span>أي طابعة حرارية 80مم أو 58مم، طابعات A4 وطابعات الملصقات.</span></div></div>
+        <div class="row"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/barcode_scanner_24_regular.svg)"></i><div><b>قارئ الباركود والميزان</b><span>أي قارئ USB، وملصقات الموازين الإلكترونية بالوزن أو السعر.</span></div></div>
+        <div class="row"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/desktop_24_regular.svg)"></i><div><b>شاشة العميل</b><span>شاشة ثانية اختيارية تعرض الفاتورة للعميل أثناء البيع.</span></div></div>
+        <div class="row"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_sync_24_regular.svg)"></i><div><b>الإنترنت</b><span>غير مطلوب للبيع. يُستخدم فقط للتحديثات، المزامنة السحابية، وواتساب.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ DOWNLOAD -->
+<section id="download" style="padding-top:40px">
+  <div class="container">
+    <div class="download reveal">
+      <div>
+        <span class="chip" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:#fff"><span class="dot"></span>تجربة مجانية كاملة 14 يومًا</span>
+        <h2 style="margin-top:18px">ابدأ الآن مع TQ Store</h2>
+        <p>حمّل المثبّت، اختر «جهاز الخادم» على جهازك الرئيسي، وابدأ البيع في دقائق. عند التفعيل لا تفقد أي بيانات أدخلتها أثناء التجربة.</p>
+        <div class="ctas">
+          <a class="btn accent lg" id="dlBtn" href="downloads/TQStore-Setup.exe" download><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>تحميل TQ Store لويندوز</a>
+          <a class="btn ghost lg" href="https://wa.me/201067041806?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20TQ%20Store" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8m8.4-18.2C18.1 1.4 15.2.2 12 .2 5.5.2.2 5.5.2 12c0 2.1.5 4.1 1.6 5.9L.1 23.9l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3"/></svg>اطلب عرضًا أو سعر الترخيص</a>
+        </div>
+      </div>
+      <div class="dl-card">
+        <div class="file"><img src="images/logo.png" alt=""><div><b>TQStore-Setup.exe</b><span>مثبّت ويندوز 64 بت · تقريبًا 80 ميجابايت</span></div></div>
+        <dl>
+          <dt>الإصدار</dt><dd>1.1.0</dd>
+          <dt>يدعم</dt><dd>Windows 10 (1809+) و Windows 11 — x64</dd>
+          <dt>يتضمّن</dt><dd>البرنامج، قاعدة البيانات (للخادم)، المكوّنات المطلوبة</dd>
+          <dt>اللغة</dt><dd>العربية و English</dd>
+          <dt>التحديثات</dt><dd>تلقائية مع الترخيص، وموقّعة رقميًا</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chat_24_regular.svg)"></i>الأسئلة الشائعة</span>
+      <h2>كل ما تريد معرفته قبل البدء</h2>
+    </div>
+    <div class="faq">
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i>هل يوجد البرنامج بالإنجليزي؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>نعم. من الإصدار 1.1 تختار لغة البرنامج (العربية أو English) لكل جهاز من الإعدادات أو من شاشة الدخول، وتختار لغة الفاتورة المطبوعة وتقرير إغلاق الوردية مستقلة عن لغة البرنامج.</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/plug_disconnected_24_regular.svg)"></i>ماذا يحدث لو توقف جهاز الخادم أثناء البيع؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>يظهر تنبيه بانقطاع الاتصال ويكمل الكاشير البيع النقدي من نسخة الأصناف والأسعار المحفوظة على جهازه، حتى لو أعاد تشغيل البرنامج. عند رجوع الاتصال تُرحَّل الفواتير تلقائيًا للخادم مرة واحدة فقط، وأي فاتورة مشكوك فيها تظهر للمدير لمراجعتها.</div>
+      </details>
+      <details class="card reveal" open>
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_sync_24_regular.svg)"></i>هل يعمل البرنامج بدون إنترنت؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>نعم، بالكامل. البيع والمخزون والحسابات والتقارير كلها تعمل على شبكة المحل المحلية. الإنترنت يُستخدم فقط للتحديثات والمزامنة السحابية الاختيارية ورسائل واتساب. وحتى لو توقف جهاز الخادم نفسه، يكمل الكاشير البيع من جهازه وتُرحَّل الفواتير تلقائيًا عند رجوع الاتصال.</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/phone_desktop_24_regular.svg)"></i>كم جهاز كاشير أستطيع تشغيله؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>جهاز خادم واحد وأي عدد من أجهزة الكاشير على نفس الشبكة. كل كاشير له ورديته ودرجه الخاص، وكل الأجهزة ترى نفس الأصناف والأرصدة لحظيًا. يُفعَّل كل جهاز بترخيصه.</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/database_24_regular.svg)"></i>هل بياناتي في أمان؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>بياناتك على جهازك أنت داخل قاعدة بيانات SQL Server. البرنامج يأخذ نسخة احتياطية تلقائيًا عند كل تسجيل خروج في المجلد الذي تحدده، ويمكنك الاستعادة بضغطة، مع مزامنة اختيارية لنسخة سحابية.</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/document_table_24_regular.svg)"></i>عندي أصناف وعملاء على إكسيل، هل أبدأ من الصفر؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>لا. يمكنك استيراد الأصناف (بالأقسام والوحدات والأسعار والباركود) والعملاء والموردين من ملف إكسيل مباشرة، مع قالب جاهز للتحميل من داخل البرنامج.</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/key_24_regular.svg)"></i>كيف أفعّل النسخة بعد التجربة؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>من شاشة «التفعيل» يظهر كود جهازك — أرسله بزر واتساب الجاهز، وستستلم مفتاح الترخيص فتلصقه وتضغط «تفعيل». بياناتك أثناء التجربة تبقى كما هي. وفي التراخيص السنوية يذكّرك البرنامج بالتجديد قبل الموعد بـ30 يومًا.</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>كيف تصلني التحديثات؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>رابط التحديثات مسجّل داخل ترخيصك، فلا تحتاج أي إعداد. مع التحديثات التلقائية ينزّل البرنامج الإصدار الجديد في الخلفية ويثبّته عند إغلاقه، أو تثبّته فورًا من «تحديث متاح». التحديث موقّع رقميًا فلا يمكن لأحد دفع نسخة مزيفة.</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/scales_24_regular.svg)"></i>هل يناسب نشاطي؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>صُمّم أساسًا للسوبر ماركت والبقالة والهايبر، ويناسب محلات الملابس والإكسسوارات (ألوان ومقاسات)، المكتبات، الصيدليات التجارية، محلات الحلويات والمخبوزات (وحدة التصنيع)، والعطارة (باركود الميزان).</div>
+      </details>
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/person_support_24_regular.svg)"></i>هل يوجد دعم فني؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>نعم، تواصل مباشر مع المطوّر على واتساب للتثبيت والتدريب والاستفسارات، ويوجد دليل استخدام كامل بالعربي داخل البرنامج نفسه.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ CONTACT -->
+<section id="contact" style="padding-top:20px">
+  <div class="container contact">
+    <div class="card reveal">
+      <div class="dev">
+        <div class="avatar">MG</div>
+        <div><b>Mazen Esam Gaber</b><span>مطوّر TQ Store — تطبيقات ويندوز .NET / C#</span></div>
+      </div>
+      <div class="contact-list">
+        <a href="https://wa.me/201067041806" target="_blank" rel="noopener"><svg class="wa" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8m8.4-18.2C18.1 1.4 15.2.2 12 .2 5.5.2.2 5.5.2 12c0 2.1.5 4.1 1.6 5.9L.1 23.9l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3"/></svg>واتساب<span>+20 106 704 1806</span></a>
+        <a href="tel:+201067041806"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/phone_24_regular.svg)"></i>اتصال<span>+20 106 704 1806</span></a>
+        <a href="https://systemtq.com"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/globe_24_regular.svg)"></i>الموقع<span>systemtq.com</span></a>
+      </div>
+    </div>
+    <div class="card reveal" style="display:grid;align-content:center;gap:16px">
+      <h2 style="font-size:30px">جاهز تنقل متجرك لمستوى أعلى؟</h2>
+      <p style="color:var(--text-2);font-size:17px">احجز عرضًا مباشرًا للبرنامج على بيانات تشبه بيانات محلك، أو ابدأ التجربة المجانية الآن وتواصل معنا وقتما احتجت.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:6px">
+        <a class="btn accent lg" href="#download"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>حمّل التجربة المجانية</a>
+        <a class="btn lg" href="https://wa.me/201067041806?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B9%D8%B1%D8%B6%D9%8B%D8%A7%20%D9%84%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20TQ%20Store" target="_blank" rel="noopener">احجز عرضًا مباشرًا</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================================================ BUILT WITH -->
+<section id="tech" style="padding-top:20px">
+  <div class="container">
+    <div class="section-head reveal" style="margin-bottom:34px">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/code_24_regular.svg)"></i>عن البرنامج تقنيًا</span>
+      <h2 style="font-size:clamp(24px,3vw,32px)">مبني بأدوات مايكروسوفت الحديثة</h2>
+      <p style="font-size:16px">لمن يهمه التفاصيل التقنية: برنامج سطح مكتب أصلي لويندوز، وليس موقعًا داخل متصفح.</p>
+    </div>
+    <div class="tech reveal">
+      <div class="card tech-item"><b>.NET 10</b><span>أحدث منصة تطوير من مايكروسوفت — سرعة واستقرار</span></div>
+      <div class="card tech-item"><b>WinUI 3</b><span>واجهة ويندوز الأصلية بتصميم Fluent ونظام الألوان الخاص بالنظام</span></div>
+      <div class="card tech-item"><b>SQL Server</b><span>قاعدة بيانات احترافية تتحمّل مئات الآلاف من الفواتير</span></div>
+      <div class="card tech-item"><b>WebView2</b><span>محرّك الطباعة والتقارير وتصدير PDF</span></div>
+      <div class="card tech-item"><b>توقيع رقمي</b><span>تراخيص وتحديثات موقّعة لا يمكن تزويرها</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<a class="to-top" id="toTop" href="#home" aria-label="العودة للأعلى" title="العودة للأعلى"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_up_24_regular.svg)"></i></a>
+
+<footer>
+  <div class="container inner">
+    <a class="brand" href="#home"><img src="images/logo.png" alt="" width="28" height="28" style="width:28px;height:28px">TQ Store</a>
+    <span>© <span id="year">2026</span> TQ Store — جميع الحقوق محفوظة. صُنع بواسطة Mazen Gaber.</span>
+    <div class="links"><a href="#modules">الوحدات</a><a href="#requirements">المتطلبات</a><a href="#download">التحميل</a><a href="#faq">الأسئلة</a></div>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/201067041806" target="_blank" rel="noopener" aria-label="تواصل على واتساب">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8m8.4-18.2C18.1 1.4 15.2.2 12 .2 5.5.2.2 5.5.2 12c0 2.1.5 4.1 1.6 5.9L.1 23.9l6.2-1.6c1.7.9 3.7 1.4 5.7 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3"/></svg>
+</a>
+
+<!-- ================================================================================================ LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+  <div class="dlg">
+    <header>
+      <i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/window_24_regular.svg);color:var(--accent)"></i>
+      <b id="lbTitle"></b><span id="lbCount"></span>
+      <div class="sp">
+        <button class="btn subtle icon" id="lbPrev" aria-label="السابق"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_right_24_regular.svg)"></i></button>
+        <button class="btn subtle icon" id="lbNext" aria-label="التالي"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_left_24_regular.svg)"></i></button>
+        <button class="btn subtle icon" id="lbClose" aria-label="إغلاق"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/dismiss_24_regular.svg)"></i></button>
+      </div>
+    </header>
+    <div class="body"><img id="lbImg" alt=""></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ICONS = 'https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/';
+  var root = document.documentElement;
+
+  /* ---------------- theme ---------------- */
+  var themeIcon = document.getElementById('themeIcon');
+  function applyTheme(t, save) {
+    root.setAttribute('data-theme', t);
+    themeIcon.style.setProperty('--i', 'url(' + ICONS + (t === 'dark' ? 'weather_sunny_24_regular.svg' : 'weather_moon_24_regular.svg') + ')');
+    document.querySelectorAll('img.themed').forEach(function (img) {
+      var src = img.getAttribute('data-' + t) || img.getAttribute('data-dark');
+      if (img.getAttribute('src') !== src) img.setAttribute('src', src);
+    });
+    if (save) { try { localStorage.setItem('tq-theme', t); } catch (e) {} }
+  }
+  applyTheme(root.getAttribute('data-theme') || 'dark', false);
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+  });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+    var saved = null; try { saved = localStorage.getItem('tq-theme'); } catch (x) {}
+    if (!saved) applyTheme(e.matches ? 'dark' : 'light', false);
+  });
+
+  /* ---------------- nav ---------------- */
+  var nav = document.getElementById('nav'), links = document.getElementById('navLinks'), menuBtn = document.getElementById('menuBtn');
+  var toTop = document.getElementById('toTop');
+  addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', scrollY > 8);
+    toTop.classList.toggle('show', scrollY > 700);
+  }, { passive: true });
+  toTop.addEventListener('click', function (e) { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); });
+  menuBtn.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { links.classList.remove('open'); }); });
+  var sections = Array.prototype.map.call(links.querySelectorAll('a[href^="#"]'), function (a) { return document.querySelector(a.getAttribute('href')); });
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.querySelectorAll('a').forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(function (s) { if (s) spy.observe(s); });
+
+  /* ---------------- reveal ---------------- */
+  var rv = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el, i) {
+    el.style.transitionDelay = (i % 4) * 60 + 'ms';
+    rv.observe(el);
+  });
+  /* whatever is already on screen at load shows right away (also covers browsers that delay observers) */
+  function revealVisible() {
+    document.querySelectorAll('.reveal:not(.in)').forEach(function (el) {
+      if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in');
+    });
+  }
+  requestAnimationFrame(revealVisible);
+  addEventListener('load', revealVisible);
+  /* safety net: nothing may stay hidden, whatever the browser does with observers */
+  setTimeout(function () { document.querySelectorAll('.reveal:not(.in)').forEach(function (el) { el.classList.add('in'); }); }, 2500);
+  addEventListener('scroll', revealVisible, { passive: true });
+
+  /* ---------------- tour tabs ---------------- */
+  var tabs = document.querySelectorAll('.selector button');
+  tabs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === b); });
+      document.querySelectorAll('.tour-panel').forEach(function (p) { p.classList.toggle('on', p.id === b.dataset.tab); });
+    });
+  });
+
+  /* ---------------- gallery ---------------- */
+  var shots = [
+    ['dashboard', 'الشاشة الرئيسية', 'مؤشرات الأداء والوصول السريع'],
+    ['charts', 'الرسوم البيانية', 'المبيعات اليومية والأرباح'],
+    ['charts-breakdown', 'تحليل المبيعات', 'الأقسام والأصناف والحسابات'],
+    ['sales', 'فاتورة البيع', 'بيع بالباركود ودفع متعدد'],
+    ['pos', 'نقطة البيع اللمسية', 'أقسام ملوّنة لشاشات اللمس'],
+    ['items', 'إدارة الأصناف', 'وحدات وأسعار وباركود'],
+    ['grid-filter', 'فلاتر الأعمدة', 'تصفية ذكية لأي عمود'],
+    ['categories', 'الأقسام', 'رئيسية وفرعية بألوان وترتيب'],
+    ['stock', 'نظرة عامة على المخزون', 'أرصدة وتكلفة وأرباح'],
+    ['treasury', 'الخزينة', 'أرصدة الحسابات وأدراج الورديات'],
+    ['statistics', 'الإحصائيات', 'الأعلى مبيعًا وأداء الكاشير'],
+    ['sales-report', 'تقرير المبيعات', 'كل فاتورة بتفاصيلها'],
+    ['profit', 'الأرباح والخسائر', 'صافي الربح للفترة'],
+    ['shifts', 'الورديات', 'سجل الورديات وأرقامها'],
+    ['shift-close', 'إغلاق الوردية', 'تسوية الدرج والعجز والزيادة'],
+    ['offers', 'العروض والخصومات', 'خصومات وعروض تلقائية'],
+    ['label-designer', 'مصمم الملصقات', 'تصميم وطباعة الباركود'],
+    ['receipt-layout', 'تنسيق الفاتورة', 'معاينة حية للطباعة'],
+    ['pos-layout', 'تنسيق نقطة البيع', 'مقاسات وألوان المربعات'],
+    ['permissions', 'الصلاحيات', 'صلاحية لكل شاشة'],
+    ['login', 'تسجيل الدخول', 'دخول آمن لكل مستخدم']
+  ];
+  var lightPairs = { dashboard: 1, sales: 1, pos: 1, items: 1, treasury: 1, statistics: 1, 'receipt-layout': 1, login: 1, offers: 1, charts: 1 };
+  function srcOf(key) {
+    var t = root.getAttribute('data-theme');
+    return 'images/' + key + (t === 'light' && lightPairs[key] ? '-light' : '-dark') + '.jpg';
+  }
+  var grid = document.getElementById('gallery-grid');
+  shots.forEach(function (s, i) {
+    var f = document.createElement('figure');
+    f.className = 'reveal';
+    f.innerHTML = '<img loading="lazy" width="1920" height="1080" alt="' + s[1] + '">' +
+      '<figcaption><b>' + s[1] + '</b><span>' + s[2] + '</span></figcaption>';
+    var img = f.querySelector('img');
+    img.className = 'themed';
+    img.setAttribute('data-dark', 'images/' + s[0] + '-dark.jpg');
+    img.setAttribute('data-light', lightPairs[s[0]] ? 'images/' + s[0] + '-light.jpg' : 'images/' + s[0] + '-dark.jpg');
+    img.src = srcOf(s[0]);
+    f.addEventListener('click', function () { openLb(i); });
+    grid.appendChild(f);
+    rv.observe(f);
+  });
+
+  /* ---------------- lightbox ---------------- */
+  var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'),
+      lbTitle = document.getElementById('lbTitle'), lbCount = document.getElementById('lbCount'), cur = 0, lastFocus = null;
+  function show(i) {
+    cur = (i + shots.length) % shots.length;
+    lbImg.src = srcOf(shots[cur][0]);
+    lbImg.alt = shots[cur][1];
+    lbTitle.textContent = shots[cur][1];
+    lbCount.textContent = (cur + 1) + ' / ' + shots.length;
+  }
+  function openLb(i) { lastFocus = document.activeElement; show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; document.getElementById('lbClose').focus(); }
+  function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+  document.getElementById('lbClose').onclick = closeLb;
+  document.getElementById('lbNext').onclick = function () { show(cur + 1); };
+  document.getElementById('lbPrev').onclick = function () { show(cur - 1); };
+  lb.addEventListener('click', function (e) { if (e.target === lb) closeLb(); });
+  addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') show(cur + 1);
+    if (e.key === 'ArrowRight') show(cur - 1);
+  });
+  /* any other screenshot on the page opens the same dialog */
+  document.querySelectorAll('img.zoom, #heroWindow img.shot').forEach(function (img) {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', function () {
+      var file = (img.getAttribute('src') || '').split('/').pop().replace(/-(dark|light)\.jpg$/, '');
+      var idx = shots.findIndex(function (s) { return s[0] === file; });
+      openLb(idx < 0 ? 0 : idx);
+    });
+  });
+
+  /* ---------------- light / dark compare ---------------- */
+  var cmp = document.getElementById('compare'), dragging = false;
+  function setPos(clientX) {
+    var r = cmp.getBoundingClientRect();
+    var p = Math.min(100, Math.max(0, (clientX - r.left) / r.width * 100));
+    cmp.style.setProperty('--pos', p + '%');
+  }
+  cmp.addEventListener('pointerdown', function (e) { dragging = true; cmp.setPointerCapture(e.pointerId); setPos(e.clientX); });
+  cmp.addEventListener('pointermove', function (e) { if (dragging) setPos(e.clientX); });
+  cmp.addEventListener('pointerup', function () { dragging = false; });
+  document.getElementById('knob').addEventListener('keydown', function (e) {
+    var p = parseFloat(getComputedStyle(cmp).getPropertyValue('--pos')) || 50;
+    if (e.key === 'ArrowLeft') { cmp.style.setProperty('--pos', Math.max(0, p - 5) + '%'); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { cmp.style.setProperty('--pos', Math.min(100, p + 5) + '%'); e.preventDefault(); }
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+<script>
+  // the setup lives on GitHub Releases (no size limit there); until <meta name="tq-release"> is filled in, the local copy is used
+  (function () {
+    var m = document.querySelector('meta[name="tq-release"]');
+    var base = m && m.content;
+    if (!base || base.indexOf('YOUR-GITHUB') >= 0) return;
+    document.querySelectorAll('a[href$="TQStore-Setup.exe"]').forEach(function (a) { a.href = base + 'TQStore-Setup.exe'; });
+  })();
+</script>
+</body>
+</html>
