@@ -222,6 +222,7 @@ p { margin: 0; }
   color: var(--text-2) !important; font-size: 14.5px;
   transition: background .15s, color .15s;
 }
+.nav-links a { white-space: nowrap; }
 .nav-links a:hover { background: var(--card-hover); color: var(--text) !important; }
 .nav-links a.active { color: var(--text) !important; }
 .nav-links a.active::after {
@@ -230,7 +231,7 @@ p { margin: 0; }
 .nav-actions { display: flex; align-items: center; gap: 8px; }
 .menu-btn { display: none; }
 
-@media (max-width: 1080px) {
+@media (max-width: 1280px) {
   .nav-links {
     position: fixed; top: 64px; inset-inline: 12px;
     flex-direction: column; padding: 8px;
