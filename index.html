@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TQ Store — نظام نقاط البيع وإدارة المتاجر</title>
-<meta name="description" content="TQ Store نظام متكامل لنقاط البيع وإدارة المتاجر والسوبر ماركت: مبيعات، مخزون، خزينة وبنوك، ورديات، تقارير، صلاحيات، تصنيع وتقسيط — بالعربي والإنجليزي.">
+<title>TQ Store — نظام نقاط البيع للمحلات والمطاعم</title>
+<meta name="description" content="TQ Store نظام متكامل لنقاط البيع وإدارة المتاجر والسوبر ماركت والمطاعم والكافيهات: مبيعات، مخزون، خزينة وبنوك، ورديات، تقارير، صلاحيات، تصنيع وتقسيط — بالعربي والإنجليزي.">
 <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
-<meta property="og:title" content="TQ Store — نظام نقاط البيع وإدارة المتاجر">
+<meta property="og:title" content="TQ Store — نظام نقاط البيع للمحلات والمطاعم">
 <meta property="og:description" content="سرعة الكاشير، دقة المخزون، ووضوح الحسابات — في برنامج واحد.">
 <meta property="og:image" content="https://systemtq.com/images/dashboard-dark.jpg">
 <meta property="og:url" content="https://systemtq.com/">
@@ -223,6 +223,8 @@ p { margin: 0; }
   transition: background .15s, color .15s;
 }
 .nav-links a { white-space: nowrap; }
+.brand { flex-shrink: 0; white-space: nowrap; }
+@media (max-width: 1500px) { .nav-links a { padding-inline: 9px; } }
 .nav-links a:hover { background: var(--card-hover); color: var(--text) !important; }
 .nav-links a.active { color: var(--text) !important; }
 .nav-links a.active::after {
@@ -671,11 +673,12 @@ footer .links a { color: var(--text-2) !important; }
   <div class="container inner">
     <a class="brand" href="#home" aria-label="TQ Store">
       <img src="images/logo.png" alt="" width="34" height="34">
-      <span>TQ Store<small>نظام نقاط البيع وإدارة المتاجر</small></span>
+      <span>TQ Store<small>نقاط البيع للمحلات والمطاعم</small></span>
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label="أقسام الموقع">
       <a href="#tour">جولة في البرنامج</a>
+      <a href="#restaurant">المطاعم</a>
       <a href="#modules">الوحدات</a>
       <a href="#highlights">ما يميّزه</a>
       <a href="#gallery">الشاشات</a>
@@ -704,10 +707,10 @@ footer .links a { color: var(--text-2) !important; }
 <!-- ================================================================================================ HERO -->
 <section class="hero">
   <div class="container">
-    <a class="chip reveal" href="#new" style="text-decoration:none;color:inherit"><span class="dot"></span>الإصدار 1.1 متاح الآن — عربي وإنجليزي، والبيع مستمر حتى لو توقف الخادم</a>
+    <a class="chip reveal" href="#new" style="text-decoration:none;color:inherit"><span class="dot"></span>الإصدار 1.2 متاح الآن — نظام مطاعم كامل بجانب المحلات، والضريبة والفاتورة الإلكترونية</a>
     <h1 class="reveal">إدارة متجرك بالكامل،<br><span class="grad">بسرعة الكاشير ودقة المحاسب</span></h1>
     <p class="lead reveal">
-      TQ Store نظام متكامل للسوبر ماركت والمحلات التجارية: بيع بالباركود واللمس، مخزون حيّ، خزائن وبنوك ومحافظ إلكترونية،
+      TQ Store نظام متكامل للسوبر ماركت والمحلات التجارية والمطاعم والكافيهات: بيع بالباركود واللمس، مخزون حيّ، خزائن وبنوك ومحافظ إلكترونية،
       ورديات بدرج كاش لكل كاشير، تقارير وأرباح لحظية، وصلاحيات دقيقة لكل شاشة — في واجهة هادئة وسريعة تريح الكاشير طوال اليوم.
     </p>
     <div class="ctas reveal">
@@ -718,6 +721,7 @@ footer .links a { color: var(--text-2) !important; }
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>يعمل بدون إنترنت</span>
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>عدة أجهزة كاشير على شبكة واحدة</span>
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>عربي وإنجليزي</span>
+      <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>محلات ومطاعم</span>
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>تحديثات تلقائية</span>
     </div>
 
@@ -870,43 +874,132 @@ footer .links a { color: var(--text-2) !important; }
 </section>
 
 <!-- ================================================================================================ MODULES -->
+<!-- ================================================================================================ RESTAURANTS -->
+<section id="restaurant" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/food_pizza_24_regular.svg)"></i>جديد في 1.2: نظام المطاعم</span>
+      <h2>مطعمك أو كافيهك… من الطلب للمطبخ للحساب</h2>
+      <p>صالة وطاولات وكباتن، حجوزات وقائمة انتظار، شاشة مطبخ، دليفري وتطبيقات طلبات، وتقارير مطعم — في نفس البرنامج، بنفس المخزون والخزينة والورديات.</p>
+    </div>
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/food_pizza_24_regular.svg)"></i>شاشة بيع المطعم</span>
+        <h3>تيك أواي وصالة وتوصيل وتطبيقات… من شاشة واحدة</h3>
+        <p>منيو بأحجام وإضافات ووجبات، وكل طلب يروح للمطبخ بضغطة. الخدمة والحد الأدنى للفرد والضريبة بعد الخصم تتحسب تلقائيًا، والدفع نقدي أو فيزا أو محفظة أو مقسّم.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>أحجام وإضافات ووجبات</b> بأسعار لكل نوع طلب ولكل تطبيق.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>إرسال للمطبخ وطباعة لكل قسم، وتعليق الطلب واسترجاعه.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>خصم وضيافة بصلاحيات، وموافقة المدير بكلمة السر.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/resto-pos-dark.jpg" alt="شاشة بيع المطعم" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/table_24_regular.svg)"></i>الصالة والطاولات</span>
+        <h3>خريطة الصالة وكل عمليات الطاولة</h3>
+        <p>كل طاولة قدامك: فاضية، أو مشغولة بإجماليها ووقتها وعدد أفرادها وكابتنها، أو محجوزة قريبًا. ومن الطاولة نفسها: نقل، دمج، فصل أصناف، دفع جزء من الحساب، وطباعة الشيك.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>أماكن متعددة</b> (صالة، تراس، كبار الزوار) بخدمة وحد أدنى لكل مكان.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>كباتن مربوطين بطاولاتهم ويظهروا على الشيك.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>شيك للمراجعة قبل الحساب، وتقسيم الحساب.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/resto-table-menu-dark.jpg" alt="عمليات الطاولة في الصالة" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/desktop_24_regular.svg)"></i>شاشة المطبخ</span>
+        <h3>المطبخ يشوف كل طلب لحظة بلحظة</h3>
+        <p>كارت لكل طلب وقسم بعداد وقت يتلوّن أخضر ثم برتقالي ثم أحمر. الإضافة على نفس الطلب تنزل على نفس الكارت متعلّمة «جديد» بكميتها، والإلغاء يظهر بالأحمر «اتلغى — ما تحضّرش»، مع تنبيه فوق الشاشة.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>فلاتر جاهزة</b>: نوع الطلب والحالة (جديد، بيتحضّر، فيه تعديل، متأخر).</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>All-day</b> يجمع المطلوب من كل صنف للتحضير بالجملة.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>شاشة كاملة لشاشات المطبخ، وطباعة لكل قسم.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/kitchen-dark.jpg" alt="شاشة المطبخ" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/calendar_ltr_24_regular.svg)"></i>الحجوزات وقائمة الانتظار</span>
+        <h3>احجز، قعّد، وتابع قائمة الانتظار</h3>
+        <p>سجّل الحجز بالاسم والتليفون وعدد الأفراد والطاولة، فتظهر الطاولة «محجوزة قريبًا» في شاشة البيع. ولما العميل يوصل تضغط «قعّد» وتتفتح الطاولة بعدده وكابتنها.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>قائمة انتظار بالترتيب ووقت الانتظار.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>«ما جاش» أو إلغاء الحجز بسبب.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>ملاحظات الحجز: عيد ميلاد، كرسي أطفال…</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/reservations-dark.jpg" alt="الحجوزات وقائمة الانتظار" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/vehicle_truck_profile_24_regular.svg)"></i>الدليفري والتطبيقات</span>
+        <h3>من المطبخ لباب العميل… وكل جنيه محسوب</h3>
+        <p>طلبات التوصيل متقسّمة: في المطبخ، جاهز، مع الدليفري. خصّص الطلبات للطيار بضغطة وحاسبه آخر اليوم بالعهدة والمحصّل والمرتجع، وتطبيقات الطلبات بعمولتها وتسويتها.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>عملاء بتليفونات وعناوين، ومناطق توصيل برسومها.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>محاسبة الطيار: الفكة والمحصّل والمرتجع والعمولة.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>تسوية تطبيقات الطلبات وعمولاتها من الشاشة.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/delivery-dark.jpg" alt="تخصيص الدليفري" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/data_bar_vertical_24_regular.svg)"></i>تقارير المطعم</span>
+        <h3>اعرف من أين يأتي ربحك</h3>
+        <p>المبيعات حسب نوع الطلب والصنف والكابتن والساعة، أوقات التحضير في المطبخ، الخدمة والضيافة والإلغاءات، وتقرير إغلاق يوم شامل.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>تحليل حسب نوع الطلب وحسب التطبيق.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>أوقات تحضير لكل قسم وصنف.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>تقرير إغلاق اليوم والورديات بالتفصيل.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="images/resto-analytics-dark.jpg" alt="تحليلات المطعم" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+  </div>
+</section>
+
 <section id="new" style="padding-top:40px">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/sparkle_24_regular.svg)"></i>الجديد في الإصدار 1.1</span>
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/sparkle_24_regular.svg)"></i>الجديد في الإصدار 1.2</span>
       <h2>أهم الإضافات في هذا الإصدار</h2>
-      <p>كل إضافة هنا جاءت من طلب حقيقي من أصحاب المحلات — ومتاحة مجانًا لكل من لديه تحديثات.</p>
+      <p>كل إضافة هنا جاءت من طلب حقيقي من أصحاب المحلات والمطاعم — ومتاحة مجانًا لكل من لديه تحديثات.</p>
     </div>
     <div class="modules">
       <article class="card module reveal" style="--c:#0078d4;--c2:#4cc2ff">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i></span><h3>واجهة إنجليزية كاملة بجانب العربي</h3></div>
-        <p>كل الشاشات والرسائل والتقارير بالإنجليزي من اليسار لليمين، وتغيير اللغة من الإعدادات أو من شاشة الدخول بضغطة.</p>
-        <ul><li>عربي / English</li><li>بدون فقد بيانات</li><li>أسماء افتراضية بلغتك</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/food_pizza_24_regular.svg)"></i></span><h3>نظام مطاعم كامل</h3></div>
+        <p>صالة وطاولات وكباتن، حجوزات، شاشة مطبخ، دليفري وتطبيقات — بجانب المحلات في نفس البرنامج. تختار نوع النشاط من الإعدادات.</p>
+        <ul><li>صالة وتيك أواي وتوصيل</li><li>شاشة مطبخ</li><li>حجوزات وكباتن</li></ul>
       </article>
       <article class="card module reveal" style="--c:#107c10;--c2:#6ccb5f">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/plug_disconnected_24_regular.svg)"></i></span><h3>البيع مستمر حتى لو توقف الخادم</h3></div>
-        <p>لو انقطع الاتصال بجهاز الخادم يكمل الكاشير البيع من نسخة الأصناف على جهازه، وتُرحَّل الفواتير تلقائيًا عند رجوع الاتصال — بدون تكرار.</p>
-        <ul><li>دخول بدون اتصال</li><li>ترحيل تلقائي</li><li>مراجعة المدير</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/receipt_money_24_regular.svg)"></i></span><h3>الضريبة على المدفوع فعلًا</h3></div>
+        <p>ضريبة القيمة المضافة تُحسب بعد خصم الصنف والفاتورة، وعلى رسوم التوصيل والخدمة — وفق قانون الضريبة المصري ومتطلبات هيئة الزكاة والضريبة السعودية.</p>
+        <ul><li>بعد الخصم</li><li>التوصيل والخدمة</li><li>تقرير ضريبة دقيق</li></ul>
       </article>
       <article class="card module reveal" style="--c:#8764b8;--c2:#b4a0ff">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/print_24_regular.svg)"></i></span><h3>لغة الفاتورة كما تريد</h3></div>
-        <p>فاتورة البيع وتقرير إغلاق الوردية يُطبعان بالعربي أو الإنجليزي حسب الإعداد، مع زر لتغيير لغة أي فاتورة من شاشة المعاينة.</p>
-        <ul><li>80مم و A4</li><li>عربي / English</li><li>معاينة فورية</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/qr_code_24_regular.svg)"></i></span><h3>الفاتورة الإلكترونية</h3></div>
+        <p>دعم منظومة الإيصال الإلكتروني في مصر والفوترة الإلكترونية في السعودية: توقيع إلكتروني ورمز QR على الفاتورة.</p>
+        <ul><li>مصر (ETA)</li><li>السعودية (ZATCA)</li><li>QR وتوقيع</li></ul>
       </article>
       <article class="card module reveal" style="--c:#ca5010;--c2:#ffaa44">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/scales_24_regular.svg)"></i></span><h3>الوزن والميزان الإلكتروني</h3></div>
-        <p>ميزان طاولة متصل بالجهاز يقرأ الوزن مباشرة، وأوزان جاهزة بلمسة (ربع، نص، كيلو…) أو الوزن حسب المبلغ، بجانب باركود الميزان.</p>
-        <ul><li>ميزان COM / USB</li><li>أوزان جاهزة</li><li>باركود الميزان</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_undo_24_regular.svg)"></i></span><h3>مرتجع «رد مخزن» أو «هالك»</h3></div>
+        <p>لكل صنف مرتجع تختار: يرجع للمخزن أو يتسجل هالك — بدون خصم مرتين. والمرتجع يُرد بالسعر الذي دفعه العميل فعلًا.</p>
+        <ul><li>رد مخزن</li><li>هالك</li><li>مرتجع حر بصلاحية</li></ul>
       </article>
       <article class="card module reveal" style="--c:#c239b3;--c2:#ff8ad8">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/flash_24_regular.svg)"></i></span><h3>تجهيز أسرع للمحل</h3></div>
-        <p>معالج أول تشغيل يجهّز بيانات النشاط والعملة والطباعة، وشاشة «إضافة سريعة للأصناف» لإدخال مئات الأصناف بالباركود بسرعة.</p>
-        <ul><li>معالج التشغيل</li><li>إضافة سريعة</li><li>استيراد إكسيل</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/wallet_24_regular.svg)"></i></span><h3>رصيد أول المدة</h3></div>
+        <p>سجّل ديون العملاء ومستحقات الموردين القديمة عند إضافتهم أو من ملف إكسيل، وسدّدها من شاشة التحصيل والسداد كأول بند مستحق.</p>
+        <ul><li>عند الإضافة أو بالإكسيل</li><li>في كشف الحساب</li><li>يُسدَّد من الشاشة</li></ul>
       </article>
       <article class="card module reveal" style="--c:#0063b1;--c2:#62b7ff">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_sync_24_regular.svg)"></i></span><h3>تحديثات تلقائية مع الترخيص</h3></div>
-        <p>ترخيصك يحدد مكان التحديثات: البرنامج ينزّل الإصدار الجديد في الخلفية ويثبّته عند الإغلاق — والمثبّت يفحص الويندوز ويوضح المطلوب لو غير مناسب.</p>
-        <ul><li>تنزيل في الخلفية</li><li>موقّعة رقميًا</li><li>فحص الويندوز</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/shield_lock_24_regular.svg)"></i></span><h3>أمان أدق للكاشير</h3></div>
+        <p>الكاشير الجديد لا يرى التكلفة والربح افتراضيًا، والقوائم تُخفي الشاشات غير المسموح بها، والعمليات الحساسة بموافقة المدير.</p>
+        <ul><li>إخفاء التكلفة والربح</li><li>قوائم نظيفة</li><li>موافقة المدير</li></ul>
       </article>
     </div>
   </div>
@@ -1195,7 +1288,7 @@ footer .links a { color: var(--text-2) !important; }
       <div class="dl-card">
         <div class="file"><img src="images/logo.png" alt=""><div><b>TQStore-Setup.exe</b><span>مثبّت ويندوز 64 بت · تقريبًا 80 ميجابايت</span></div></div>
         <dl>
-          <dt>الإصدار</dt><dd>1.1.0</dd>
+          <dt>الإصدار</dt><dd>1.2.0</dd>
           <dt>يدعم</dt><dd>Windows 10 (1809+) و Windows 11 — x64</dd>
           <dt>يتضمّن</dt><dd>البرنامج، قاعدة البيانات (للخادم)، المكوّنات المطلوبة</dd>
           <dt>اللغة</dt><dd>العربية و English</dd>
@@ -1214,6 +1307,10 @@ footer .links a { color: var(--text-2) !important; }
       <h2>كل ما تريد معرفته قبل البدء</h2>
     </div>
     <div class="faq">
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/food_pizza_24_regular.svg)"></i>هل يصلح البرنامج للمطاعم والكافيهات؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>نعم. من الإصدار 1.2 تختار نوع النشاط (محل أو مطعم) من الإعدادات، فتظهر شاشات المطعم: الصالة والطاولات والكباتن، الحجوزات، شاشة المطبخ، الدليفري وتطبيقات الطلبات، وتقارير المطعم — مع نفس المخزون والخزينة والورديات.</div>
+      </details>
       <details class="card reveal">
         <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i>هل يوجد البرنامج بالإنجليزي؟<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
         <div>نعم. من الإصدار 1.1 تختار لغة البرنامج (العربية أو English) لكل جهاز من الإعدادات أو من شاشة الدخول، وتختار لغة الفاتورة المطبوعة وتقرير إغلاق الوردية مستقلة عن لغة البرنامج.</div>
@@ -1411,6 +1508,14 @@ footer .links a { color: var(--text-2) !important; }
 
   /* ---------------- gallery ---------------- */
   var shots = [
+    ['resto-home', 'الشاشة الرئيسية للمطعم', 'مؤشرات اليوم والوصول السريع'],
+    ['resto-pos', 'شاشة بيع المطعم', 'صالة وتيك أواي وتوصيل'],
+    ['resto-floor', 'الطاولات', 'حالة كل طاولة لحظيًا'],
+    ['resto-table-menu', 'عمليات الطاولة', 'نقل ودمج وفصل وشيك'],
+    ['kitchen', 'شاشة المطبخ', 'كروت بعداد وقت وتنبيهات'],
+    ['reservations', 'الحجوزات', 'حجوزات اليوم وقائمة الانتظار'],
+    ['delivery', 'تخصيص الدليفري', 'من المطبخ للطيار'],
+    ['resto-analytics', 'تحليلات المطعم', 'المبيعات حسب نوع الطلب'],
     ['dashboard', 'الشاشة الرئيسية', 'مؤشرات الأداء والوصول السريع'],
     ['charts', 'الرسوم البيانية', 'المبيعات اليومية والأرباح'],
     ['charts-breakdown', 'تحليل المبيعات', 'الأقسام والأصناف والحسابات'],

@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TQ Store — Point of Sale & Store Management</title>
-<meta name="description" content="TQ Store is a complete point-of-sale and store management system for supermarkets and shops: sales, stock, treasury and banks, shifts, reports, permissions, manufacturing and installments — in Arabic and English.">
+<title>TQ Store — Point of Sale for Shops & Restaurants</title>
+<meta name="description" content="TQ Store is a complete point-of-sale and store management system for supermarkets, shops, restaurants and cafés: sales, stock, treasury and banks, shifts, reports, permissions, manufacturing and installments — in Arabic and English.">
 <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#f3f5f9" media="(prefers-color-scheme: light)">
-<meta property="og:title" content="TQ Store — Point of Sale & Store Management">
+<meta property="og:title" content="TQ Store — Point of Sale for Shops & Restaurants">
 <meta property="og:description" content="Cashier speed, stock accuracy and clear accounts — in one program.">
 <meta property="og:image" content="https://systemtq.com/images/dashboard-dark.jpg">
 <meta property="og:url" content="https://systemtq.com/">
@@ -223,6 +223,8 @@ p { margin: 0; }
   transition: background .15s, color .15s;
 }
 .nav-links a { white-space: nowrap; }
+.brand { flex-shrink: 0; white-space: nowrap; }
+@media (max-width: 1500px) { .nav-links a { padding-inline: 9px; } }
 .nav-links a:hover { background: var(--card-hover); color: var(--text) !important; }
 .nav-links a.active { color: var(--text) !important; }
 .nav-links a.active::after {
@@ -671,11 +673,12 @@ footer .links a { color: var(--text-2) !important; }
   <div class="container inner">
     <a class="brand" href="#home" aria-label="TQ Store">
       <img src="../images/logo.png" alt="" width="34" height="34">
-      <span>TQ Store<small>Point of sale & store management</small></span>
+      <span>TQ Store<small>POS for shops &amp; restaurants</small></span>
     </a>
 
     <nav class="nav-links" id="navLinks" aria-label="Site sections">
       <a href="#tour">Tour</a>
+      <a href="#restaurant">Restaurants</a>
       <a href="#modules">Modules</a>
       <a href="#highlights">Highlights</a>
       <a href="#gallery">Screens</a>
@@ -704,10 +707,10 @@ footer .links a { color: var(--text-2) !important; }
 <!-- ================================================================================================ HERO -->
 <section class="hero">
   <div class="container">
-    <a class="chip reveal" href="#new" style="text-decoration:none;color:inherit"><span class="dot"></span>Version 1.1 is out — Arabic & English, and selling continues even if the server stops</a>
+    <a class="chip reveal" href="#new" style="text-decoration:none;color:inherit"><span class="dot"></span>Version 1.2 is out — a complete restaurant system beside retail, with VAT and e-invoicing</a>
     <h1 class="reveal">Run your whole store,<br><span class="grad">at cashier speed with accountant precision</span></h1>
     <p class="lead reveal">
-      TQ Store is a complete system for supermarkets and retail shops: barcode and touch selling, live stock, cash boxes, banks and e-wallets, shifts with a cash drawer per cashier, live reports and profit, and precise permissions on every screen — in a calm, fast interface that's easy on the cashier all day.
+      TQ Store is a complete system for supermarkets, retail shops, restaurants and cafés: barcode and touch selling, live stock, cash boxes, banks and e-wallets, shifts with a cash drawer per cashier, live reports and profit, and precise permissions on every screen — in a calm, fast interface that's easy on the cashier all day.
     </p>
     <div class="ctas reveal">
       <a class="btn accent lg" href="#download"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_download_24_regular.svg)"></i>Download the trial</a>
@@ -717,6 +720,7 @@ footer .links a { color: var(--text-2) !important; }
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>Works without internet</span>
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>Several cashier PCs on one network</span>
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>Arabic & English</span>
+      <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>Shops & restaurants</span>
       <span><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i>Automatic updates</span>
     </div>
 
@@ -869,43 +873,132 @@ footer .links a { color: var(--text-2) !important; }
 </section>
 
 <!-- ================================================================================================ MODULES -->
+<!-- ================================================================================================ RESTAURANTS -->
+<section id="restaurant" style="padding-top:40px">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/food_pizza_24_regular.svg)"></i>New in 1.2: Restaurants</span>
+      <h2>Your restaurant or café… from the order to the kitchen to the bill</h2>
+      <p>Dining areas, tables and captains, reservations and a waitlist, a kitchen display, delivery and ordering apps, and restaurant reports — in the same program, with the same stock, treasury and shifts.</p>
+    </div>
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/food_pizza_24_regular.svg)"></i>Restaurant sales screen</span>
+        <h3>Take-away, dine-in, delivery and apps… from one screen</h3>
+        <p>A menu with sizes, add-ons and meals, and every order goes to the kitchen in one tap. Service charge, the minimum per guest and VAT after discounts are worked out for you, and payment is cash, card, wallet or split.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>Sizes, add-ons and meals</b> with prices per order type and per app.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Send to the kitchen with a print per station; hold an order and bring it back.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Discounts and hospitality by permission, with a manager password override.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="../images/en/resto-pos-dark.jpg" alt="Restaurant sales screen" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/table_24_regular.svg)"></i>Dining room & tables</span>
+        <h3>The floor map and every table action</h3>
+        <p>Every table at a glance: free, busy with its total, time, guests and captain, or reserved soon. And from the table itself: move, merge, split items, pay part of the bill and print the check.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>Several areas</b> (main hall, terrace, VIP) with their own service charge and minimum.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Captains assigned to their tables and printed on the check.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>A check to review before paying, and split bills.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="../images/en/resto-table-menu-dark.jpg" alt="Table actions on the floor" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/desktop_24_regular.svg)"></i>Kitchen display</span>
+        <h3>The kitchen sees every order as it happens</h3>
+        <p>A card per order and station with a timer that turns from green to amber to red. An addition to the same order joins its card marked «New» with its quantity, and a cancelled item shows in red «Cancelled — don't make», with a notice at the top of the screen.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>Ready-made filters</b>: order type and status (new, in progress, changed, late).</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span><b>All-day</b> adds up what is needed of each item for batch prep.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Full screen for kitchen monitors, and a print per station.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="../images/en/kitchen-dark.jpg" alt="Kitchen display" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/calendar_ltr_24_regular.svg)"></i>Reservations & waitlist</span>
+        <h3>Book, seat and keep the waitlist moving</h3>
+        <p>Book by name, phone, party size and table, and the table shows «Reserved soon» on the sales screen. When the guests arrive, tap «Seat» and the table opens with their party size and captain.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>A waitlist in order with waiting times.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>«No-show» or cancel with a reason.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Booking notes: birthday, high chair…</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="../images/en/reservations-dark.jpg" alt="Reservations and waitlist" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/vehicle_truck_profile_24_regular.svg)"></i>Delivery & apps</span>
+        <h3>From the kitchen to the customer's door… every pound counted</h3>
+        <p>Delivery orders are laid out: in the kitchen, ready, out with a driver. Assign orders to a driver in one tap and settle with him at the end of the day — float, collected and returned — and settle the ordering apps with their commission.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Customers with phones and addresses, delivery zones with their fees.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Driver settlement: float, collected, returns and commission.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Ordering-app settlement and commissions from the screen.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="../images/en/delivery-dark.jpg" alt="Assign drivers" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+    <div class="spot flip reveal">
+      <div class="spot-text">
+        <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/data_bar_vertical_24_regular.svg)"></i>Restaurant reports</span>
+        <h3>Know where your profit comes from</h3>
+        <p>Sales by order type, item, captain and hour, kitchen preparation times, service charge, hospitality and cancellations, and a complete end-of-day report.</p>
+        <ul class="checks">
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Analysis by order type and by app.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Prep times per station and item.</span></li>
+          <li><span class="tick"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/checkmark_24_regular.svg)"></i></span><span>Detailed end-of-day and shift reports.</span></li>
+        </ul>
+      </div>
+      <div class="spot-media"><div class="halo"></div><div class="frame"><img class="zoom" src="../images/en/resto-analytics-dark.jpg" alt="Restaurant analytics" loading="lazy" width="1920" height="1080"></div></div>
+    </div>
+  </div>
+</section>
+
 <section id="new" style="padding-top:40px">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/sparkle_24_regular.svg)"></i>New in version 1.1</span>
+      <span class="eyebrow"><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/sparkle_24_regular.svg)"></i>New in version 1.2</span>
       <h2>The highlights of this release</h2>
-      <p>Every addition here came from a real request by shop owners — and it's free for everyone with updates.</p>
+      <p>Every addition here came from a real request by shop and restaurant owners — and it's free for everyone with updates.</p>
     </div>
     <div class="modules">
       <article class="card module reveal" style="--c:#0078d4;--c2:#4cc2ff">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i></span><h3>A full English interface beside Arabic</h3></div>
-        <p>Every screen, message and report in English, left to right — switch the language in Settings or on the sign-in screen with one click.</p>
-        <ul><li>Arabic / English</li><li>No data loss</li><li>Default names in your language</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/food_pizza_24_regular.svg)"></i></span><h3>A complete restaurant system</h3></div>
+        <p>Dining areas, tables and captains, reservations, a kitchen display, delivery and apps — beside retail in the same program. Pick the business type in Settings.</p>
+        <ul><li>Dine-in, take-away, delivery</li><li>Kitchen display</li><li>Reservations & captains</li></ul>
       </article>
       <article class="card module reveal" style="--c:#107c10;--c2:#6ccb5f">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/plug_disconnected_24_regular.svg)"></i></span><h3>Selling continues even if the server stops</h3></div>
-        <p>If the server PC goes offline, the cashier keeps selling from the copy of items on their PC, and invoices are posted automatically when the connection returns — never twice.</p>
-        <ul><li>Offline sign-in</li><li>Automatic posting</li><li>Manager review</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/receipt_money_24_regular.svg)"></i></span><h3>VAT on what is actually paid</h3></div>
+        <p>VAT is charged after line and invoice discounts, and on delivery and service fees — in line with Egypt's VAT law and Saudi ZATCA requirements.</p>
+        <ul><li>After discounts</li><li>Delivery & service</li><li>Accurate tax report</li></ul>
       </article>
       <article class="card module reveal" style="--c:#8764b8;--c2:#b4a0ff">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/print_24_regular.svg)"></i></span><h3>Receipts in the language you want</h3></div>
-        <p>The sales invoice and the shift-closing report print in Arabic or English as set, with a button to switch any single invoice's language in the preview.</p>
-        <ul><li>80mm & A4</li><li>Arabic / English</li><li>Live preview</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/qr_code_24_regular.svg)"></i></span><h3>E-invoicing</h3></div>
+        <p>Support for Egypt's e-receipt system and Saudi e-invoicing: an electronic signature and a QR code on the invoice.</p>
+        <ul><li>Egypt (ETA)</li><li>Saudi Arabia (ZATCA)</li><li>QR & signature</li></ul>
       </article>
       <article class="card module reveal" style="--c:#ca5010;--c2:#ffaa44">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/scales_24_regular.svg)"></i></span><h3>Weighing and electronic scales</h3></div>
-        <p>A table scale connected to the PC reads the weight directly, plus one-tap ready weights (¼, ½, 1 kg…) or weight by amount, beside scale barcodes.</p>
-        <ul><li>COM / USB scale</li><li>Ready weights</li><li>Scale barcodes</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_undo_24_regular.svg)"></i></span><h3>Returns: back to stock or damaged</h3></div>
+        <p>For each returned item choose: back to stock or recorded as damaged — never deducted twice. A return refunds what the customer actually paid.</p>
+        <ul><li>Back to stock</li><li>Damaged</li><li>Free return by permission</li></ul>
       </article>
       <article class="card module reveal" style="--c:#c239b3;--c2:#ff8ad8">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/flash_24_regular.svg)"></i></span><h3>Faster shop setup</h3></div>
-        <p>A first-run wizard sets up your business details, currency and printing, and a «Quick add items» screen enters hundreds of items by barcode fast.</p>
-        <ul><li>Setup wizard</li><li>Quick add</li><li>Excel import</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/wallet_24_regular.svg)"></i></span><h3>Opening balances</h3></div>
+        <p>Record customers' old debts and what you owe suppliers when you add them or from Excel, and pay them from the collection and payment screen as the first item due.</p>
+        <ul><li>On adding or by Excel</li><li>On the statement</li><li>Paid from the screen</li></ul>
       </article>
       <article class="card module reveal" style="--c:#0063b1;--c2:#62b7ff">
-        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/arrow_sync_24_regular.svg)"></i></span><h3>Automatic updates with your license</h3></div>
-        <p>Your license tells the program where updates live: it downloads the new version in the background and installs it when closing — and the installer checks Windows and explains what's needed if it isn't suitable.</p>
-        <ul><li>Background download</li><li>Digitally signed</li><li>Windows check</li></ul>
+        <div class="head"><span class="tile"><i class="ic l" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/shield_lock_24_regular.svg)"></i></span><h3>Tighter cashier security</h3></div>
+        <p>New cashiers don't see cost and profit by default, menus hide the screens they can't open, and sensitive actions need a manager.</p>
+        <ul><li>Cost & profit hidden</li><li>Clean menus</li><li>Manager approval</li></ul>
       </article>
     </div>
   </div>
@@ -1194,7 +1287,7 @@ footer .links a { color: var(--text-2) !important; }
       <div class="dl-card">
         <div class="file"><img src="../images/logo.png" alt=""><div><b>TQStore-Setup.exe</b><span>64-bit Windows installer · about 80 MB</span></div></div>
         <dl>
-          <dt>Version</dt><dd>1.1.0</dd>
+          <dt>Version</dt><dd>1.2.0</dd>
           <dt>Supports</dt><dd>Windows 10 (1809+) and Windows 11 — x64</dd>
           <dt>Includes</dt><dd>The program, the database (for the server), the required components</dd>
           <dt>Language</dt><dd>Arabic and English</dd>
@@ -1213,6 +1306,10 @@ footer .links a { color: var(--text-2) !important; }
       <h2>Everything you want to know before starting</h2>
     </div>
     <div class="faq">
+      <details class="card reveal">
+        <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/food_pizza_24_regular.svg)"></i>Does it work for restaurants and cafés?<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
+        <div>Yes. From version 1.2 you pick the business type (shop or restaurant) in Settings, and the restaurant screens appear: dining areas, tables and captains, reservations, the kitchen display, delivery and ordering apps, and restaurant reports — with the same stock, treasury and shifts.</div>
+      </details>
       <details class="card reveal">
         <summary><i class="ic" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/local_language_24_regular.svg)"></i>Is the program available in English?<i class="ic chev" style="--i:url(https://cdn.jsdelivr.net/npm/@fluentui/svg-icons@1.1.292/icons/chevron_down_24_regular.svg)"></i></summary>
         <div>Yes. From version 1.1 you choose the program's language (Arabic or English) per PC in Settings or on the sign-in screen, and you choose the language of the printed invoice and the shift-closing report separately from the program's language.</div>
@@ -1410,6 +1507,14 @@ footer .links a { color: var(--text-2) !important; }
 
   /* ---------------- gallery ---------------- */
   var shots = [
+    ['resto-home', 'Restaurant home', 'Today\'s figures and quick access'],
+    ['resto-pos', 'Restaurant sales screen', 'Dine-in, take-away, delivery'],
+    ['resto-floor', 'Tables', 'Every table\'s state, live'],
+    ['resto-table-menu', 'Table actions', 'Move, merge, split, check'],
+    ['kitchen', 'Kitchen display', 'Timed cards and notices'],
+    ['reservations', 'Reservations', 'Today\'s bookings and the waitlist'],
+    ['delivery', 'Assign drivers', 'From the kitchen to the driver'],
+    ['resto-analytics', 'Restaurant analytics', 'Sales by order type'],
     ['dashboard', 'Home screen', 'Performance indicators and quick access'],
     ['charts', 'Charts', 'Daily sales and profit'],
     ['charts-breakdown', 'Sales analysis', 'Categories, items and accounts'],
